@@ -25,12 +25,11 @@
     "lint": "eslint .",
     "postlint": "npm run typecheck",
     "typecheck": "flow check",
-    "pretest": "npm run lint",
     "test": "npm run test-only",
     "test-only": "jest --coverage",
     "test:watch": "jest --watch",
-    "build": "babel src/**/*.js -d dist",
-    "build:watch": "babel --watch src/**/*.js -d dist"
+    "build": "babel src -d dist",
+    "build:watch": "babel --watch src -d dist"
   },
   "author": "Linonetwo <linonetwo012@gmail.com>",
   "contributors": [
