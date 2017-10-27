@@ -6,7 +6,8 @@
     ["transform-runtime", {
       "polyfill": false,
       "regenerator": true
-    }]
+    }],
+    "static-fs"
   ],
   "env": {
     "production": {
