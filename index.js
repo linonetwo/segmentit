@@ -7,12 +7,12 @@
  */
 
 // 分词接口
-var Segment = require('./lib/Segment');
+var Segment = require('./dist/Segment');
 module.exports = exports = Segment;
 exports.Segment = Segment;
 
 // 词性接口
-exports.POSTAG = require('./lib/POSTAG');
+exports.POSTAG = require('./dist/POSTAG');
 
 // 版本
 exports.version = require('./package.json').version;
