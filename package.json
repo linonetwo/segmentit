@@ -31,11 +31,15 @@
     "build": "babel src -d dist",
     "build:watch": "babel --watch src -d dist"
   },
-  "author": "Linonetwo <linonetwo012@gmail.com>",
+  "author": "Lei Zongmin <leizongmin@gmail.com>",
   "contributors": [
     {
       "name": "Lei Zongmin",
       "email": "leizongmin@gmail.com"
+    },
+    {
+      "name": "Linonetwo",
+      "email": "linonetwo012@gmail.com"
     }
   ],
   "repository": {
