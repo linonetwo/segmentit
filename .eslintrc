@@ -6,6 +6,8 @@
   },
   "extends": "airbnb",
   "env": {
+    "jest": true,
+    "jasmine": true,
     "browser": true,
     "node": true
   },
@@ -13,17 +15,32 @@
     "arrow-parens": ["off"],
     "compat/compat": "error",
     "consistent-return": "off",
-    "flowtype-errors/show-errors": "error",
     "generator-star-spacing": "off",
     "import/no-unresolved": "error",
     "import/no-extraneous-dependencies": "off",
     "no-console": "off",
     "promise/param-names": "error",
-    "promise/no-native": "off"
+    "promise/no-native": "off",
+    "flowtype/require-valid-file-annotation": [
+      2,
+      "always"
+    ],
+    "flowtype/space-after-type-colon": [
+      2,
+      "always"
+    ],
+    "flowtype/require-return-type": [
+      1,
+      "always",
+      {
+        "excludeArrowFunctions": true
+      }
+    ]
   },
   "plugins": [
     "import",
     "compat",
+    "flowtype",
     "promise"
   ]
 }
