@@ -6,8 +6,6 @@
  * @author 林一二<linonetwo012@gmail.com>
  */
 
-import fs from 'fs';
-import path from 'path';
 import POSTAG from './POSTAG';
 import Tokenizer from './Tokenizer';
 import Optimizer from './Optimizer';
@@ -33,7 +31,7 @@ export default class Segment {
  * @param {String|Array|Object} module 模块名称(数组)或模块对象
  * @return {Segment}
  */
-  use(module) {
+  use(module): Segment {
     const me = this;
 
     if (Array.isArray(module)) {
@@ -65,7 +63,7 @@ export default class Segment {
  * @param {Boolean} convert_to_lower 是否全部转换为小写
  * @return {Segment}
  */
-  loadDict(name, type, convert_to_lower) {
+  loadDict(name, type, convert_to_lower): Segment {
     const filename = this._resolveDictFilename(name);
     if (!type) type = 'TABLE'; // 默认为TABLE
 
@@ -113,7 +111,7 @@ export default class Segment {
  *
  * @param {String} name 字典文件名
  */
-  loadSynonymDict(name) {
+  loadSynonymDict(name): Segment {
     const filename = this._resolveDictFilename(name);
     const type = 'SYNONYM';
 
@@ -143,7 +141,7 @@ export default class Segment {
  *
  * @param {String} name 字典文件名
  */
-  loadStopwordDict(name) {
+  loadStopwordDict(name): Segment {
     const filename = this._resolveDictFilename(name);
     const type = 'STOPWORD';
 
@@ -168,7 +166,7 @@ export default class Segment {
  *
  * @return {Segment}
  */
-  useDefault() {
+  useDefault(): Segment {
     this
       // 识别模块
       // 强制分割类单词识别
