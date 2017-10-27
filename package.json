@@ -9,7 +9,30 @@
     "中文",
     "分词"
   ],
-  "author": "Zongmin Lei <leizongmin@gmail.com>",
+  "jest": {
+    "testEnvironment": "node",
+    "moduleFileExtensions": [
+      "js"
+    ],
+    "coverageDirectory": "coverage",
+    "collectCoverageFrom": [
+      "src/**/*.js"
+    ]
+  },
+  "scripts": {
+    "clean": "rm -rf coverage dist tmp",
+    "flow-typed": "rimraf flow-typed/npm && flow-typed install --overwrite || true",
+    "lint": "eslint .",
+    "postlint": "npm run typecheck",
+    "typecheck": "flow check",
+    "pretest": "npm run lint",
+    "test": "npm run test-only",
+    "test-only": "jest --coverage",
+    "test:watch": "jest --watch",
+    "build": "babel src/**/*.js -d dist",
+    "build:watch": "babel --watch src/**/*.js -d dist"
+  },
+  "author": "Linonetwo <linonetwo012@gmail.com>",
   "contributors": [
     {
       "name": "Lei Zongmin",
@@ -21,22 +44,33 @@
     "url": "git://github.com/leizongmin/node-segment.git"
   },
   "engines": {
-    "node": ">= 0.4.0"
+    "node": ">=6.9"
   },
-  "dependencies": {},
+  "dependencies": {
+    "babel-runtime": "~6.23.0",
+    "flow-typed": "^2.2.1"
+  },
   "devDependencies": {
+    "babel-cli": "~6.24.1",
+    "babel-core": "~6.25.0",
     "babel-eslint": "^8.0.1",
+    "babel-jest": "~19.0.0",
+    "babel-plugin-transform-async-to-generator": "~6.24.1",
+    "babel-plugin-transform-es2015-modules-commonjs": "~6.24.1",
+    "babel-plugin-transform-flow-strip-types": "~6.22.0",
+    "babel-plugin-transform-runtime": "~6.23.0",
+    "babel-preset-stage-3": "~6.24.1",
     "eslint": "^4.9.0",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-compat": "^2.0.1",
+    "eslint-plugin-flowtype": "~2.31.0",
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-jsx-a11y": "^6.0.2",
     "eslint-plugin-promise": "^3.6.0",
     "eslint-plugin-react": "^7.4.0",
+    "flow-bin": "~0.44.2",
+    "jest": "~19.0.2",
     "mocha": ">= 1.2",
     "should": "*"
-  },
-  "scripts": {
-    "test": "mocha -t 5000"
   }
 }

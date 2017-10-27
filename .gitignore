@@ -11,5 +11,27 @@ pids
 logs
 results
 
-node_modules
-npm-debug.log
+
+# Logs
+*.log
+npm-debug.log*
+yarn-error.log
+
+# Dependencies
+node_modules/
+
+# Coverage
+coverage/
+
+# Transpiled files
+dist/
+
+# VS Code
+.vscode
+jsconfig.json
+
+# Misc
+.DS_Store
+tmp/
+
+flow-typed/npm
