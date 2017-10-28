@@ -1,13 +1,43 @@
 // @flow
-export CHS_NAMES from './CHS_NAMES';
-export ChsNameTokenizer from './ChsNameTokenizer';
-export DictOptimizer from './DictOptimizer';
-export EmailOptimizer from './EmailOptimizer';
-export PunctuationTokenizer from './PunctuationTokenizer';
-export URLTokenizer from './URLTokenizer';
-export ChsNameOptimizer from './ChsNameOptimizer';
-export DatetimeOptimizer from './DatetimeOptimizer';
-export DictTokenizer from './DictTokenizer';
-export ForeignTokenizer from './ForeignTokenizer';
-export SingleTokenizer from './SingleTokenizer';
-export WildcardTokenizer from './WildcardTokenizer';
+import CHS_NAMES from './CHS_NAMES';
+import ChsNameTokenizer from './ChsNameTokenizer';
+import DictOptimizer from './DictOptimizer';
+import EmailOptimizer from './EmailOptimizer';
+import PunctuationTokenizer from './PunctuationTokenizer';
+import URLTokenizer from './URLTokenizer';
+import ChsNameOptimizer from './ChsNameOptimizer';
+import DatetimeOptimizer from './DatetimeOptimizer';
+import DictTokenizer from './DictTokenizer';
+import ForeignTokenizer from './ForeignTokenizer';
+import SingleTokenizer from './SingleTokenizer';
+import WildcardTokenizer from './WildcardTokenizer';
+
+export {
+  CHS_NAMES,
+  ChsNameTokenizer,
+  DictOptimizer,
+  EmailOptimizer,
+  PunctuationTokenizer,
+  URLTokenizer,
+  ChsNameOptimizer,
+  DatetimeOptimizer,
+  DictTokenizer,
+  ForeignTokenizer,
+  SingleTokenizer,
+  WildcardTokenizer,
+};
+
+export default [
+  CHS_NAMES,
+  ChsNameTokenizer,
+  DictOptimizer,
+  EmailOptimizer,
+  PunctuationTokenizer,
+  URLTokenizer,
+  ChsNameOptimizer,
+  DatetimeOptimizer,
+  DictTokenizer,
+  ForeignTokenizer,
+  SingleTokenizer,
+  WildcardTokenizer,
+];
