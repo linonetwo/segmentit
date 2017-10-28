@@ -5,15 +5,15 @@
  *
  * @author 老雷<leizongmin@gmail.com>
  */
- 
-var debug = console.log; 
- 
+
+const debug = console.log;
+
 /** 模块类型 */
 exports.type = 'optimizer';
 
 /**
  * 模块初始化
- * 
+ *
  * @param {Segment} segment 分词接口
  */
 exports.init = function (segment) {
@@ -28,38 +28,38 @@ exports.init = function (segment) {
  * @return {array}
  */
 exports.doOptimize = function (words, is_not_first) {
-  //debug(words);
-  if (typeof is_not_first == 'undefined') {
+  // debug(words);
+  if (typeof is_not_first === 'undefined') {
     is_not_first = false;
   }
   // 合并相邻的能组成一个单词的两个词
-  var TABLE = exports.segment.getDict('TABLE');
-  var POSTAG = exports.segment.POSTAG;
-  
-  var i = 0;
-  var ie = words.length - 1;
+  const TABLE = exports.segment.getDict('TABLE');
+  const POSTAG = exports.segment.POSTAG;
+
+  let i = 0;
+  let ie = words.length - 1;
   while (i < ie) {
-    var w1 = words[i];
-    var w2 = words[i + 1];
-    //debug(w1.w + ', ' + w2.w);
-    
+    const w1 = words[i];
+    const w2 = words[i + 1];
+    // debug(w1.w + ', ' + w2.w);
+
     // ==========================================
     // 能组成一个新词的(词性必须相同)
-    var nw = w1.w + w2.w;
+    const nw = w1.w + w2.w;
     if (w1.p == w2.p && nw in TABLE) {
       words.splice(i, 2, {
-        w:  nw,
-        p:  TABLE[nw].p
+        w: nw,
+        p: TABLE[nw].p,
       });
       ie--;
       continue;
     }
-    
+
     // 形容词 + 助词 = 形容词，如： 不同 + 的 = 不同的
     if ((w1.p & POSTAG.D_A) > 0 && (w2.p & POSTAG.D_U)) {
       words.splice(i, 2, {
-        w:  nw,
-        p:  POSTAG.D_A
+        w: nw,
+        p: POSTAG.D_A,
       });
       ie--;
       continue;
@@ -68,12 +68,12 @@ exports.doOptimize = function (words, is_not_first) {
     // ============================================
     // 数词组合
     if ((w1.p & POSTAG.A_M) > 0) {
-      //debug(w2.w + ' ' + (w2.p & POSTAG.A_M));
+      // debug(w2.w + ' ' + (w2.p & POSTAG.A_M));
       // 百分比数字 如 10%，或者下一个词也是数词，则合并
       if ((w2.p & POSTAG.A_M) > 0 || w2.w == '%') {
         words.splice(i, 2, {
-          w:  w1.w + w2.w,
-          p:  POSTAG.A_M
+          w: w1.w + w2.w,
+          p: POSTAG.A_M,
         });
         ie--;
         continue;
@@ -81,8 +81,8 @@ exports.doOptimize = function (words, is_not_first) {
       // 数词 + 量词，合并。如： 100个
       if ((w2.p & POSTAG.A_Q) > 0) {
         words.splice(i, 2, {
-          w:  w1.w + w2.w,
-          p:  POSTAG.D_MQ // 数量词
+          w: w1.w + w2.w,
+          p: POSTAG.D_MQ, // 数量词
         });
         ie--;
         continue;
@@ -93,8 +93,8 @@ exports.doOptimize = function (words, is_not_first) {
       if (w3 && (w3.p & POSTAG.A_M) > 0 &&
          (w2.w == '.' || w2.w == '点' || w2.w == '分之')) {
         words.splice(i, 3, {
-          w:  w1.w + w2.w + w3.w,
-          p:  POSTAG.A_M
+          w: w1.w + w2.w + w3.w,
+          p: POSTAG.A_M,
         });
         ie -= 2;
         continue;
@@ -103,10 +103,10 @@ exports.doOptimize = function (words, is_not_first) {
 
     // 修正 “十五点五八”问题
     if ((w1.p & POSTAG.D_MQ) > 0 && w1.w.substr(-1) === '点' && w2.p & POSTAG.A_M) {
-      //debug(w1, w2);
-      var i2 = 2;
-      var w4w = '';
-      for (var j = i + i2; j < ie; j++) {
+      // debug(w1, w2);
+      let i2 = 2;
+      let w4w = '';
+      for (let j = i + i2; j < ie; j++) {
         var w3 = words[j];
         if ((w3.p & POSTAG.A_M) > 0) {
           w4w += w3.w;
@@ -116,17 +116,17 @@ exports.doOptimize = function (words, is_not_first) {
         }
       }
       words.splice(i, i2, {
-        w:  w1.w + w2.w + w4w,
-        p:  POSTAG.D_MQ // 数量词
+        w: w1.w + w2.w + w4w,
+        p: POSTAG.D_MQ, // 数量词
       });
       ie -= i2 - 1;
       continue;
     }
-    
+
     // 移到下一个词
     i++;
   }
-  
+
   // 针对组合数字后无法识别新组合的数字问题，需要重新扫描一次
   return is_not_first === true ? words : exports.doOptimize(words, true);
 };

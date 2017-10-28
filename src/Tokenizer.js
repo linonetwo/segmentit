@@ -5,13 +5,13 @@
  *
  * @author 老雷<leizongmin@gmail.com>
  */
- 
+
 /**
  * 分词模块管理器
 *
 * @param {Segment} 分词接口
-*/ 
-var Tokenizer = module.exports = function (segment) {
+*/
+const Tokenizer = module.exports = function (segment) {
   this.segment = segment;
 };
 
@@ -27,8 +27,8 @@ Tokenizer.prototype.split = function (text, modules) {
     throw Error('No tokenizer module!');
   } else {
     // 按顺序分别调用各个module来进行分词 ： 各个module仅对没有识别类型的单词进行分词
-    var ret = [{w: text}];
-    modules.forEach(function (module) {
+    let ret = [{ w: text }];
+    modules.forEach((module) => {
       ret = module.split(ret);
     });
     return ret;

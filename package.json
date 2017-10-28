@@ -23,6 +23,7 @@
     "clean": "rm -rf coverage dist tmp",
     "flow-typed": "rimraf flow-typed/npm && flow-typed install --overwrite || true",
     "lint": "eslint .",
+    "lintfix": "eslint . --fix",
     "postlint": "npm run typecheck",
     "typecheck": "flow check",
     "test": "npm run test-only",
