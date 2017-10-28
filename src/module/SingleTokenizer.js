@@ -5,15 +5,15 @@
  *
  * @author 老雷<leizongmin@gmail.com>
  */
- 
-var debug = console.log; 
- 
+
+const debug = console.log;
+
 /** 模块类型 */
 exports.type = 'tokenizer';
 
 /**
  * 模块初始化
- * 
+ *
  * @param {Segment} segment 分词接口
  */
 exports.init = function (segment) {
@@ -27,8 +27,8 @@ exports.init = function (segment) {
  * @return {array}
  */
 exports.split = function (words) {
-  var POSTAG = exports.segment.POSTAG;
-  var ret = [];
+  const POSTAG = exports.segment.POSTAG;
+  let ret = [];
   for (var i = 0, word; word = words[i]; i++) {
     if (word.p) {
       ret.push(word);
@@ -48,14 +48,14 @@ exports.split = function (words) {
  * @param {int} cur 开始位置
  * @return {array}
  */
-var splitSingle= function (text, cur) {
-  var POSTAG = exports.segment.POSTAG;
+var splitSingle = function (text, cur) {
+  const POSTAG = exports.segment.POSTAG;
   if (isNaN(cur)) cur = 0;
-  var ret = [];
+  const ret = [];
   while (cur < text.length) {
     ret.push({
-      w:  text.charAt(cur),
-      p:  POSTAG.UNK
+      w: text.charAt(cur),
+      p: POSTAG.UNK,
     });
     cur++;
   }

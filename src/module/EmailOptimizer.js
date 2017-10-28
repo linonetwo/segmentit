@@ -6,7 +6,7 @@
  * @author 老雷<leizongmin@gmail.com>
  */
 
-var debug = console.log;
+const debug = console.log;
 
 /** 模块类型 */
 exports.type = 'optimizer';
@@ -27,18 +27,17 @@ exports.init = function (segment) {
  * @return {array}
  */
 exports.doOptimize = function (words) {
-  var POSTAG = exports.segment.POSTAG;
-  //debug(words);
+  const POSTAG = exports.segment.POSTAG;
+  // debug(words);
 
-  var i = 0;
-  var ie = words.length - 1;
-  var addr_start = false;
-  var has_at = false;
+  let i = 0;
+  let ie = words.length - 1;
+  let addr_start = false;
+  let has_at = false;
   while (i < ie) {
     var word = words[i];
-    var is_ascii = ((word.p == POSTAG.A_NX) ||
-            (word.p == POSTAG.A_M && word.w.charCodeAt(0) < 128))
-            ? true : false;
+    var is_ascii = !!(((word.p == POSTAG.A_NX) ||
+            (word.p == POSTAG.A_M && word.w.charCodeAt(0) < 128)));
 
     // 如果是外文字符或者数字，符合电子邮件地址开头的条件
     if (addr_start === false && is_ascii) {
@@ -55,10 +54,10 @@ exports.doOptimize = function (words) {
       // 如果已经遇到过@符号，且出现了其他字符，则截取邮箱地址
       if (has_at !== false && words[i - 1].w != '@' && is_ascii === false && !(word.w in EMAILCHAR)) {
         var mailws = words.slice(addr_start, i);
-        //debug(toEmailAddress(mailws));
+        // debug(toEmailAddress(mailws));
         words.splice(addr_start, mailws.length, {
-          w:  toEmailAddress(mailws),
-          p:  POSTAG.URL
+          w: toEmailAddress(mailws),
+          p: POSTAG.URL,
         });
         i = addr_start + 1;
         ie -= mailws.length - 1;
@@ -82,15 +81,14 @@ exports.doOptimize = function (words) {
   // 检查剩余部分
   if (addr_start && has_at && words[ie]) {
     var word = words[ie];
-    var is_ascii = ((word.p == POSTAG.A_NX) ||
-            (word.p == POSTAG.A_M && word.w in EMAILCHAR))
-            ? true : false;
+    var is_ascii = !!(((word.p == POSTAG.A_NX) ||
+            (word.p == POSTAG.A_M && word.w in EMAILCHAR)));
     if (is_ascii) {
       var mailws = words.slice(addr_start, words.length);
-      //debug(toEmailAddress(mailws));
+      // debug(toEmailAddress(mailws));
       words.splice(addr_start, mailws.length, {
-        w:  toEmailAddress(mailws),
-        p:  POSTAG.URL
+        w: toEmailAddress(mailws),
+        p: POSTAG.URL,
       });
     }
   }
@@ -101,9 +99,9 @@ exports.doOptimize = function (words) {
 // ======================================================
 // 邮箱地址中允许出现的字符
 // 参考：http://www.cs.tut.fi/~jkorpela/rfc/822addr.html
-var _EMAILCHAR = '!"#$%&\'*+-/0123456789=?@ABCDEFGHIJKLMNOPQRSTUVWXYZ^_`abcdefghijklmnopqrstuvwxyz{|}~.'.split('');
+const _EMAILCHAR = '!"#$%&\'*+-/0123456789=?@ABCDEFGHIJKLMNOPQRSTUVWXYZ^_`abcdefghijklmnopqrstuvwxyz{|}~.'.split('');
 var EMAILCHAR = {};
-for (var i in _EMAILCHAR) EMAILCHAR[_EMAILCHAR[i]] = 1;
+for (const i in _EMAILCHAR) EMAILCHAR[_EMAILCHAR[i]] = 1;
 
 
 /**
@@ -113,7 +111,7 @@ for (var i in _EMAILCHAR) EMAILCHAR[_EMAILCHAR[i]] = 1;
  * @return {string}
  */
 var toEmailAddress = function (words) {
-  var ret = words[0].w;
+  let ret = words[0].w;
   for (var i = 1, word; word = words[i]; i++) {
     ret += word.w;
   }

@@ -5,20 +5,21 @@
  *
  * @author 老雷<leizongmin@gmail.com>
  */
- 
-var FAMILY_NAME_1 = require('./CHS_NAMES').FAMILY_NAME_1; 
-var FAMILY_NAME_2 = require('./CHS_NAMES').FAMILY_NAME_2; 
-var SINGLE_NAME = require('./CHS_NAMES').SINGLE_NAME;
-var DOUBLE_NAME_1 = require('./CHS_NAMES').DOUBLE_NAME_1;
-var DOUBLE_NAME_2 = require('./CHS_NAMES').DOUBLE_NAME_2;
-var debug = console.log; 
- 
+
+const FAMILY_NAME_1 = require('./CHS_NAMES').FAMILY_NAME_1;
+const FAMILY_NAME_2 = require('./CHS_NAMES').FAMILY_NAME_2;
+const SINGLE_NAME = require('./CHS_NAMES').SINGLE_NAME;
+const DOUBLE_NAME_1 = require('./CHS_NAMES').DOUBLE_NAME_1;
+const DOUBLE_NAME_2 = require('./CHS_NAMES').DOUBLE_NAME_2;
+
+const debug = console.log;
+
 /** 模块类型 */
 exports.type = 'tokenizer';
 
 /**
  * 模块初始化
- * 
+ *
  * @param {Segment} segment 分词接口
  */
 exports.init = function (segment) {
@@ -32,31 +33,31 @@ exports.init = function (segment) {
  * @return {array}
  */
 exports.split = function (words) {
-  var POSTAG = exports.segment.POSTAG;
-  var ret = [];
+  const POSTAG = exports.segment.POSTAG;
+  const ret = [];
   for (var i = 0, word; word = words[i]; i++) {
     if (word.p > 0) {
       ret.push(word);
       continue;
     }
     // 仅对未识别的词进行匹配
-    var nameinfo = matchName(word.w);
+    const nameinfo = matchName(word.w);
     if (nameinfo.length < 1) {
       ret.push(word);
       continue;
     }
     // 分离出人名
-    var lastc = 0;
+    let lastc = 0;
     for (var ui = 0, url; url = nameinfo[ui]; ui++) {
       if (url.c > lastc) {
-        ret.push({w: word.w.substr(lastc, url.c - lastc)});
+        ret.push({ w: word.w.substr(lastc, url.c - lastc) });
       }
-      ret.push({w: url.w, p: POSTAG.A_NR});
+      ret.push({ w: url.w, p: POSTAG.A_NR });
       lastc = url.c + url.w.length;
     }
-    var lastn = nameinfo[nameinfo.length - 1];
+    const lastn = nameinfo[nameinfo.length - 1];
     if (lastn.c + lastn.w.length < word.w.length) {
-      ret.push({w: word.w.substr(lastn.c + lastn.w.length)});
+      ret.push({ w: word.w.substr(lastn.c + lastn.w.length) });
     }
   }
   return ret;
@@ -73,11 +74,11 @@ exports.split = function (words) {
  */
 var matchName = function (text, cur) {
   if (isNaN(cur)) cur = 0;
-  var ret = [];
-  while (cur < text.length) {//debug('cur=' + cur + ', ' + text.charAt(cur));
-    var name = false;
+  const ret = [];
+  while (cur < text.length) { // debug('cur=' + cur + ', ' + text.charAt(cur));
+    let name = false;
     // 复姓
-    var f2 = text.substr(cur, 2);
+    const f2 = text.substr(cur, 2);
     if (f2 in FAMILY_NAME_2) {
       var n1 = text.charAt(cur + 2);
       var n2 = text.charAt(cur + 3);
@@ -88,7 +89,7 @@ var matchName = function (text, cur) {
       }
     }
     // 单姓
-    var f1 = text.charAt(cur);
+    const f1 = text.charAt(cur);
     if (name === false && f1 in FAMILY_NAME_1) {
       var n1 = text.charAt(cur + 1);
       var n2 = text.charAt(cur + 2);
@@ -102,7 +103,7 @@ var matchName = function (text, cur) {
     if (name === false) {
       cur++;
     } else {
-      ret.push({w: name, c: cur});
+      ret.push({ w: name, c: cur });
       cur += name.length;
     }
   }
