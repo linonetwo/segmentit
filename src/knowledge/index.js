@@ -15,3 +15,8 @@ export const wildcard: string = readFileSync(join(__dirname, 'wildcard.txt'), 'u
 export const synonym: string = readFileSync(join(__dirname, 'synonym.txt'), 'utf8');
 // 停止符
 export const stopword: string = readFileSync(join(__dirname, 'stopword.txt'), 'utf8');
+
+// 字典集，方便 import
+export const dicts = [pangu, panguExtend1, panguExtend2, names, wildcard];
+export const synonyms = [synonym];
+export const stopwords = [stopword];
