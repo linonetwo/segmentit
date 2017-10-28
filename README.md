@@ -15,7 +15,7 @@ console.log(result);
 对于 runkit 环境：
 
 ```javascript
-const Segmentit = require('segmentit');
+const Segmentit = require('segmentit').default;
 const useDefault = require('segmentit').useDefault;
 const segmentit = useDefault(new Segmentit());
 const result = segmentit.doSegment('工信处女干事每月经过下属科室都要亲口交代24口交换机等技术性器件的安装工作。');
