@@ -17,6 +17,6 @@ export const synonym: string = readFileSync(join(__dirname, 'synonym.txt'), 'utf
 export const stopword: string = readFileSync(join(__dirname, 'stopword.txt'), 'utf8');
 
 // 字典集，方便 import
-export const dicts = [pangu, panguExtend1, panguExtend2, names, wildcard];
-export const synonyms = [synonym];
-export const stopwords = [stopword];
+export const dicts: string[] = [pangu, panguExtend1, panguExtend2, names, wildcard];
+export const synonyms: string[] = [synonym];
+export const stopwords: string[] = [stopword];

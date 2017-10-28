@@ -42,7 +42,7 @@ export default class Segment {
     }
 
     return this;
-  }
+  };
 
   /**
  * 载入字典文件
@@ -52,7 +52,7 @@ export default class Segment {
  * @param {Boolean} convertToLower 是否全部转换为小写
  * @return {Segment}
  */
-  loadDict = (dict, type = 'TABLE', convertToLower: boolean = false): Segment => {
+  loadDict = (dict: string | string[], type = 'TABLE', convertToLower: boolean = false): Segment => {
     if (Array.isArray(dict)) {
       dict.forEach(this.loadDict);
     } else {
@@ -63,18 +63,18 @@ export default class Segment {
       const TABLE2 = this.DICT[`${type}2`]; // 词典表  '长度' => '词' => 属性
       // 导入数据
       dict
-        .map(aDict => {
-          if (convertToLower) return aDict.toLowerCase();
-          return aDict;
-        })
         .split(/\r?\n/)
+        .map(line => {
+          if (convertToLower) return line.toLowerCase();
+          return line;
+        })
         .forEach(line => {
           const blocks = line.split('|');
           if (blocks.length > 2) {
             const w = blocks[0].trim();
             const p = Number(blocks[1]);
             const f = Number(blocks[2]);
-  
+
             // 一定要检查单词是否为空，如果为空会导致Bug
             if (w.length > 0) {
               TABLE[w] = { f, p };
@@ -86,7 +86,7 @@ export default class Segment {
     }
 
     return this;
-  }
+  };
 
   /**
  * 取词典表
@@ -94,9 +94,7 @@ export default class Segment {
  * @param {String} type 类型
  * @return {object}
  */
-  getDict = (type: string) => {
-    return this.DICT[type];
-  }
+  getDict = (type: string) => this.DICT[type];
 
   /**
  * 载入同义词词典
@@ -104,28 +102,32 @@ export default class Segment {
  * @param {Object} dict 字典文件
  */
   loadSynonymDict = (dict): Segment => {
-    const type = 'SYNONYM';
+    if (Array.isArray(dict)) {
+      dict.forEach(this.loadSynonymDict);
+    } else {
+      const type = 'SYNONYM';
 
-    // 初始化词典
-    if (!this.DICT[type]) this.DICT[type] = {};
-    const TABLE = this.DICT[type]; // 词典表  '同义词' => '标准词'
-    // 导入数据
-    dict
-      .split(/\r?\n/)
-      .map(line => line.split(','))
-      .forEach(blocks => {
-        if (blocks.length > 1) {
-          const n1 = blocks[0].trim();
-          const n2 = blocks[1].trim();
-          TABLE[n1] = n2;
-          if (TABLE[n2] === n1) {
-            delete TABLE[n2];
+      // 初始化词典
+      if (!this.DICT[type]) this.DICT[type] = {};
+      const TABLE = this.DICT[type]; // 词典表  '同义词' => '标准词'
+      // 导入数据
+      dict
+        .split(/\r?\n/)
+        .map(line => line.split(','))
+        .forEach(blocks => {
+          if (blocks.length > 1) {
+            const n1 = blocks[0].trim();
+            const n2 = blocks[1].trim();
+            TABLE[n1] = n2;
+            if (TABLE[n2] === n1) {
+              delete TABLE[n2];
+            }
           }
-        }
-      });
+        });
+    }
 
     return this;
-  }
+  };
 
   /**
  * 载入停止符词典
@@ -133,23 +135,27 @@ export default class Segment {
  * @param {Object} dict 字典文件
  */
   loadStopwordDict = (dict): Segment => {
-    const type = 'STOPWORD';
+    if (Array.isArray(dict)) {
+      dict.forEach(this.loadStopwordDict);
+    } else {
+      const type = 'STOPWORD';
 
-    // 初始化词典
-    if (!this.DICT[type]) this.DICT[type] = {};
-    const TABLE = this.DICT[type]; // 词典表  '同义词' => '标准词'
-    // 导入数据
-    dict
-      .split(/\r?\n/)
-      .map(line => line.trim())
-      .forEach(line => {
-        if (line) {
-          TABLE[line] = true;
-        }
-      });
+      // 初始化词典
+      if (!this.DICT[type]) this.DICT[type] = {};
+      const TABLE = this.DICT[type]; // 词典表  '同义词' => '标准词'
+      // 导入数据
+      dict
+        .split(/\r?\n/)
+        .map(line => line.trim())
+        .forEach(line => {
+          if (line) {
+            TABLE[line] = true;
+          }
+        });
+    }
 
     return this;
-  }
+  };
 
   /**
  * 开始分词
@@ -223,7 +229,7 @@ export default class Segment {
     }
 
     return ret;
-  }
+  };
 
   /**
  * 将单词数组连接成字符串
