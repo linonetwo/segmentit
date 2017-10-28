@@ -31,22 +31,11 @@ export default class Segment {
  * @param {String|Array|Object} module 模块名称(数组)或模块对象
  * @return {Segment}
  */
-  use(module): Segment {
-    const me = this;
-
+  use(module: Array|Object): Segment {
+    // 传入列表的话就递归调用
     if (Array.isArray(module)) {
-      module.forEach(module => {
-        me.use(module[i]);
-      });
+      module.forEach(this.use);
     } else {
-      if (typeof module === 'string') {
-        const filename = path.resolve(__dirname, 'module', `${module}.js`);
-        if (!fs.existsSync(filename)) {
-          throw Error(`Cannot find module "${module}".`);
-        } else {
-          module = require(filename);
-        }
-      }
       // 初始化并注册模块
       module.init(this);
       this.modules[module.type].push(module);
