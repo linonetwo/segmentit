@@ -31,7 +31,7 @@ export default class Segment {
  * @param {String|Array|Object} module 模块名称(数组)或模块对象
  * @return {Segment}
  */
-  use(module: Array | Object): Segment {
+  use = (module: Array | Object): Segment => {
     // 传入列表的话就递归调用
     if (Array.isArray(module)) {
       module.forEach(this.use);
@@ -49,38 +49,41 @@ export default class Segment {
  *
  * @param {String} name 字典文件名
  * @param {String} type 类型
- * @param {Boolean} convert_to_lower 是否全部转换为小写
+ * @param {Boolean} convertToLower 是否全部转换为小写
  * @return {Segment}
  */
-  loadDict(name, type, convert_to_lower): Segment {
-    const filename = this._resolveDictFilename(name);
-    if (!type) type = 'TABLE'; // 默认为TABLE
-
-    // 初始化词典
-    if (!this.DICT[type]) this.DICT[type] = {};
-    if (!this.DICT[`${type}2`]) this.DICT[`${type}2`] = {};
-    const TABLE = this.DICT[type]; // 词典表  '词' => {属性}
-    const TABLE2 = this.DICT[`${type}2`]; // 词典表  '长度' => '词' => 属性
-    // 导入数据
-    const POSTAG = this.POSTAG;
-    let data = fs.readFileSync(filename, 'utf8');
-    if (convert_to_lower) data = data.toLowerCase();
-
-    data.split(/\r?\n/).forEach(line => {
-      const blocks = line.split('|');
-      if (blocks.length > 2) {
-        const w = blocks[0].trim();
-        const p = Number(blocks[1]);
-        const f = Number(blocks[2]);
-
-        // 一定要检查单词是否为空，如果为空会导致Bug
-        if (w.length > 0) {
-          TABLE[w] = { f, p };
-          if (!TABLE2[w.length]) TABLE2[w.length] = {};
-          TABLE2[w.length][w] = TABLE[w];
-        }
-      }
-    });
+  loadDict = (dict, type = 'TABLE', convertToLower: boolean = false): Segment => {
+    if (Array.isArray(dict)) {
+      dict.forEach(this.loadDict);
+    } else {
+      // 初始化词典
+      if (!this.DICT[type]) this.DICT[type] = {};
+      if (!this.DICT[`${type}2`]) this.DICT[`${type}2`] = {};
+      const TABLE = this.DICT[type]; // 词典表  '词' => {属性}
+      const TABLE2 = this.DICT[`${type}2`]; // 词典表  '长度' => '词' => 属性
+      // 导入数据
+      dict
+        .map(aDict => {
+          if (convertToLower) return aDict.toLowerCase();
+          return aDict;
+        })
+        .split(/\r?\n/)
+        .forEach(line => {
+          const blocks = line.split('|');
+          if (blocks.length > 2) {
+            const w = blocks[0].trim();
+            const p = Number(blocks[1]);
+            const f = Number(blocks[2]);
+  
+            // 一定要检查单词是否为空，如果为空会导致Bug
+            if (w.length > 0) {
+              TABLE[w] = { f, p };
+              if (!TABLE2[w.length]) TABLE2[w.length] = {};
+              TABLE2[w.length][w] = TABLE[w];
+            }
+          }
+        });
+    }
 
     return this;
   }
@@ -91,7 +94,7 @@ export default class Segment {
  * @param {String} type 类型
  * @return {object}
  */
-  getDict(type: string) {
+  getDict = (type: string) => {
     return this.DICT[type];
   }
 
@@ -100,7 +103,7 @@ export default class Segment {
  *
  * @param {Object} dict 字典文件
  */
-  loadSynonymDict(dict): Segment {
+  loadSynonymDict = (dict): Segment => {
     const type = 'SYNONYM';
 
     // 初始化词典
@@ -129,7 +132,7 @@ export default class Segment {
  *
  * @param {Object} dict 字典文件
  */
-  loadStopwordDict(dict): Segment {
+  loadStopwordDict = (dict): Segment => {
     const type = 'STOPWORD';
 
     // 初始化词典
@@ -148,7 +151,6 @@ export default class Segment {
     return this;
   }
 
-
   /**
  * 开始分词
  *
@@ -160,7 +162,7 @@ export default class Segment {
  *   - {Boolean} stripStopword 去除停止符
  * @return {Array}
  */
-  doSegment(text, options) {
+  doSegment = (text, options) => {
     const me = this;
     options = options || {};
     let ret = [];
@@ -281,16 +283,5 @@ export default class Segment {
     }
 
     return -1;
-  }
-
-  _resolveDictFilename(name) {
-    var filename = path.resolve(name);
-    if (!fs.existsSync(filename)) {
-      var filename = path.resolve(__dirname, '../dicts', name);
-      if (!fs.existsSync(filename)) {
-        throw Error(`Cannot find dict file "${filename}".`);
-      }
-    }
-    return filename;
   }
 }

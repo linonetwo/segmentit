@@ -1,5 +1,7 @@
 {
   "plugins": [
+    ["transform-class-properties"],
+    ["transform-es2015-classes"],
     ["transform-es2015-modules-commonjs"],
     ["transform-flow-strip-types"],
     ["transform-async-to-generator"],
@@ -7,7 +9,7 @@
       "polyfill": false,
       "regenerator": true
     }],
-    "static-fs"
+    ["static-fs"]
   ],
   "env": {
     "production": {
