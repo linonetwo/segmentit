@@ -101,7 +101,7 @@ export default class Segment {
  *
  * @param {Object} dict 字典文件
  */
-  loadSynonymDict = (dict): Segment => {
+  loadSynonymDict = (dict: string | string[]): Segment => {
     if (Array.isArray(dict)) {
       dict.forEach(this.loadSynonymDict);
     } else {
@@ -134,7 +134,7 @@ export default class Segment {
  *
  * @param {Object} dict 字典文件
  */
-  loadStopwordDict = (dict): Segment => {
+  loadStopwordDict = (dict: string | string[]): Segment => {
     if (Array.isArray(dict)) {
       dict.forEach(this.loadStopwordDict);
     } else {
