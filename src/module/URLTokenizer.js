@@ -1,4 +1,4 @@
-'use strict';
+// @flow
 
 /**
  * URL识别模块
