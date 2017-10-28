@@ -17,6 +17,7 @@ export {
   SingleTokenizer,
   WildcardTokenizer,
 } from './module';
+export modules from './module';
 
 export {
   pangu,
