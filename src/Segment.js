@@ -31,7 +31,7 @@ export default class Segment {
  * @param {String|Array|Object} module 模块名称(数组)或模块对象
  * @return {Segment}
  */
-  use(module: Array|Object): Segment {
+  use(module: Array | Object): Segment {
     // 传入列表的话就递归调用
     if (Array.isArray(module)) {
       module.forEach(this.use);
@@ -91,36 +91,35 @@ export default class Segment {
  * @param {String} type 类型
  * @return {object}
  */
-  getDict(type) {
+  getDict(type: string) {
     return this.DICT[type];
   }
 
   /**
  * 载入同义词词典
  *
- * @param {String} name 字典文件名
+ * @param {Object} dict 字典文件
  */
-  loadSynonymDict(name): Segment {
-    const filename = this._resolveDictFilename(name);
+  loadSynonymDict(dict): Segment {
     const type = 'SYNONYM';
 
     // 初始化词典
     if (!this.DICT[type]) this.DICT[type] = {};
     const TABLE = this.DICT[type]; // 词典表  '同义词' => '标准词'
     // 导入数据
-    const data = fs.readFileSync(filename, 'utf8');
-
-    data.split(/\r?\n/).forEach(line => {
-      const blocks = line.split(',');
-      if (blocks.length > 1) {
-        const n1 = blocks[0].trim();
-        const n2 = blocks[1].trim();
-        TABLE[n1] = n2;
-        if (TABLE[n2] === n1) {
-          delete TABLE[n2];
+    dict
+      .split(/\r?\n/)
+      .map(line => line.split(','))
+      .forEach(blocks => {
+        if (blocks.length > 1) {
+          const n1 = blocks[0].trim();
+          const n2 = blocks[1].trim();
+          TABLE[n1] = n2;
+          if (TABLE[n2] === n1) {
+            delete TABLE[n2];
+          }
         }
-      }
-    });
+      });
 
     return this;
   }
@@ -128,59 +127,27 @@ export default class Segment {
   /**
  * 载入停止符词典
  *
- * @param {String} name 字典文件名
+ * @param {Object} dict 字典文件
  */
-  loadStopwordDict(name): Segment {
-    const filename = this._resolveDictFilename(name);
+  loadStopwordDict(dict): Segment {
     const type = 'STOPWORD';
 
     // 初始化词典
     if (!this.DICT[type]) this.DICT[type] = {};
     const TABLE = this.DICT[type]; // 词典表  '同义词' => '标准词'
     // 导入数据
-    const data = fs.readFileSync(filename, 'utf8');
-
-    data.split(/\r?\n/).forEach(line => {
-      line = line.trim();
-      if (line) {
-        TABLE[line] = true;
-      }
-    });
+    dict
+      .split(/\r?\n/)
+      .map(line => line.trim())
+      .forEach(line => {
+        if (line) {
+          TABLE[line] = true;
+        }
+      });
 
     return this;
   }
 
-  /**
- * 使用默认的识别模块和字典文件
- *
- * @return {Segment}
- */
-  useDefault(): Segment {
-    this
-      // 识别模块
-      // 强制分割类单词识别
-      .use('URLTokenizer') // URL识别
-      .use('WildcardTokenizer') // 通配符，必须在标点符号识别之前
-      .use('PunctuationTokenizer') // 标点符号识别
-      .use('ForeignTokenizer') // 外文字符、数字识别，必须在标点符号识别之后
-      // 中文单词识别
-      .use('DictTokenizer') // 词典识别
-      .use('ChsNameTokenizer') // 人名识别，建议在词典识别之后
-      // 优化模块
-      .use('EmailOptimizer') // 邮箱地址识别
-      .use('ChsNameOptimizer') // 人名识别优化
-      .use('DictOptimizer') // 词典识别优化
-      .use('DatetimeOptimizer') // 日期时间识别优化
-      // 字典文件
-      .loadDict('dict.txt') // 盘古词典
-      .loadDict('dict2.txt') // 扩展词典（用于调整原盘古词典）
-      .loadDict('dict3.txt') // 扩展词典（用于调整原盘古词典）
-      .loadDict('names.txt') // 常见名词、人名
-      .loadDict('wildcard.txt', 'WILDCARD', true) // 通配符
-      .loadSynonymDict('synonym.txt') // 同义词
-      .loadStopwordDict('stopword.txt'); // 停止符
-    return this;
-  }
 
   /**
  * 开始分词
