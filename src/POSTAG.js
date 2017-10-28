@@ -1,4 +1,4 @@
-'use strict';
+// @flow
 
 /**
  * 单词类型
