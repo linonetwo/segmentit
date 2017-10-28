@@ -54,7 +54,7 @@ export default class Segment {
  */
   loadDict = (dict: string | string[], type = 'TABLE', convertToLower: boolean = false): Segment => {
     if (Array.isArray(dict)) {
-      dict.forEach(this.loadDict);
+      dict.forEach(d => this.loadDict(d));
     } else {
       // 初始化词典
       if (!this.DICT[type]) this.DICT[type] = {};
@@ -103,7 +103,7 @@ export default class Segment {
  */
   loadSynonymDict = (dict: string | string[]): Segment => {
     if (Array.isArray(dict)) {
-      dict.forEach(this.loadSynonymDict);
+      dict.forEach(d => this.loadSynonymDict(d));
     } else {
       const type = 'SYNONYM';
 
@@ -136,7 +136,7 @@ export default class Segment {
  */
   loadStopwordDict = (dict: string | string[]): Segment => {
     if (Array.isArray(dict)) {
-      dict.forEach(this.loadStopwordDict);
+      dict.forEach(d => this.loadStopwordDict(d));
     } else {
       const type = 'STOPWORD';
 
