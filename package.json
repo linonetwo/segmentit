@@ -29,7 +29,7 @@
     "test": "npm run test-only",
     "test-only": "jest --coverage",
     "test:watch": "jest --watch",
-    "prepublish": "npm run build",
+    "prepublish": "npm run test && npm run build",
     "build": "babel src -d dist",
     "build:watch": "babel --watch src -d dist"
   },
