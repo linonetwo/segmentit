@@ -1,7 +1,7 @@
 /** @flow */
 
 import assert from 'assert';
-import Segment from '../';
+import Segment, { modules, dicts, synonyms, stopwords } from '../src';
 
 describe('分词测试', () => {
   let segment = null;
@@ -14,7 +14,10 @@ describe('分词测试', () => {
 
   it('init', () => {
     segment = new Segment();
-    segment.useDefault();
+    segment.use(modules);
+    segment.loadDict(dicts);
+    segment.loadSynonymDict(synonyms);
+    segment.loadStopwordDict(stopwords);
   });
 
   it('常用测试题目', () => {
