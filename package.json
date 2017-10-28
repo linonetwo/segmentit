@@ -1,7 +1,7 @@
 {
-  "name": "segment",
+  "name": "segmentit",
   "main": "./dist/index.js",
-  "version": "0.1.3",
+  "version": "1.0.0",
   "description": "Chinese word segmentation 中文分词模块",
   "keywords": [
     "segment",
@@ -29,6 +29,7 @@
     "test": "npm run test-only",
     "test-only": "jest --coverage",
     "test:watch": "jest --watch",
+    "prepublish": "npm run build",
     "build": "babel src -d dist",
     "build:watch": "babel --watch src -d dist"
   },
@@ -45,7 +46,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/leizongmin/node-segment.git"
+    "url": "git://github.com/linonetwo/node-segment.git"
   },
   "engines": {
     "node": ">=6.9"

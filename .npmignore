@@ -1,0 +1,14 @@
+src
+__tests__
+coverage
+flow-typed/npm
+node_modules
+
+LICENSE
+.editorconfig
+.git
+.eslintignore
+.gitignore
+.DS_Store
+.eslintrc
+.npmignore
