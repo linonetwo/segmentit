@@ -1,9 +1,11 @@
 // @flow
-export default './Segment';
+import Segment from './Segment';
 
-export { Segment } from './Segment';
+export default Segment;
+
 export { POSTAG } from './POSTAG';
 export {
+  modules,
   CHS_NAMES,
   ChsNameTokenizer,
   DictOptimizer,
@@ -17,7 +19,6 @@ export {
   SingleTokenizer,
   WildcardTokenizer,
 } from './module';
-export modules from './module';
 
 export {
   pangu,
