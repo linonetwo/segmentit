@@ -27,17 +27,18 @@ export {
   WildcardTokenizer,
 };
 
-export default [
-  CHS_NAMES,
-  ChsNameTokenizer,
-  DictOptimizer,
-  EmailOptimizer,
-  PunctuationTokenizer,
-  URLTokenizer,
-  ChsNameOptimizer,
-  DatetimeOptimizer,
-  DictTokenizer,
-  ForeignTokenizer,
-  SingleTokenizer,
-  WildcardTokenizer,
+export const modules = [
+  // 强制分割类单词识别
+  URLTokenizer, // URL识别
+  WildcardTokenizer, // 通配符，必须在标点符号识别之前
+  PunctuationTokenizer, // 标点符号识别
+  ForeignTokenizer, // 外文字符、数字识别，必须在标点符号识别之后
+  // 中文单词识别
+  DictOptimizer, // 词典识别
+  ChsNameTokenizer, // 人名识别，建议在词典识别之后
+  // 优化模块
+  EmailOptimizer, // 邮箱地址识别
+  ChsNameOptimizer, // 人名识别优化
+  DatetimeOptimizer, // 日期时间识别优化
+  DictTokenizer, // 词典识别优化
 ];
