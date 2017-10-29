@@ -14,6 +14,7 @@
     "moduleFileExtensions": [
       "js"
     ],
+    "watchman": false,
     "coverageDirectory": "coverage",
     "collectCoverageFrom": [
       "src/**/*.js"
@@ -29,7 +30,8 @@
     "test": "npm run test-only",
     "test-only": "jest --coverage",
     "test:watch": "jest --watch",
-    "prepublish": "npm run test && npm run build",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm run test",
     "build": "babel src -d dist",
     "build:watch": "babel --watch src -d dist"
   },
