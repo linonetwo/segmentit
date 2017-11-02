@@ -2,6 +2,8 @@
 
 本模块基于 [node-segment](https://github.com/leizongmin/node-segment) 魔改，增加了 electron、浏览器支持，并准备针对 electron 多线程运行环境进行优化。
 
+之所以要花时间魔改，是因为 ```segment``` 和 ```nodejieba``` 虽然在 node 环境下很好用，但根本无法在浏览器和 electron 环境下运行。我把代码重构为 ES2015，并用 babel 插件内联了字典文件，全部载入的话大小是 5.4M，但如果有些字典你并不需要，字典和模块应该是支持 tree shaking 的。
+
 ## Usage
 
 ```javascript
