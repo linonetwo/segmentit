@@ -8,9 +8,14 @@ const _DATETIME = ['世纪', '年', '年份', '年度', '月', '月份', '月度
 const DATETIME = {};
 for (const i in _DATETIME) DATETIME[_DATETIME[i]] = _DATETIME[i].length;
 
+/**
+ * 对未识别的单词进行分词
+ *
+ * @param {array} words 单词数组
+ * @return {array}
+ */
 export default class DictTokenizer extends Module {
   type = 'tokenizer';
-
   split(words: Array<SegmentToken>): Array<SegmentToken> {
     // debug(words);
     const POSTAG = this.segment.POSTAG;
@@ -53,7 +58,7 @@ export default class DictTokenizer extends Module {
    * @return {array}  返回格式   {w: '单词', c: 开始位置}
    */
   matchWord(text, cur, preword): Array<TokenStartPosition> {
-    if (Number.isNaN(cur)) cur = 0;
+    if (isNaN(cur)) cur = 0;
     const ret = [];
     const s = false;
     const TABLE = this.segment.getDict('TABLE2');
@@ -70,6 +75,7 @@ export default class DictTokenizer extends Module {
 
     return this.filterWord(ret, preword, text);
   }
+  // debug(matchWord('长春市长春药店'));
 
   /**
    * 选择最有可能匹配的单词
@@ -195,7 +201,7 @@ export default class DictTokenizer extends Module {
           assess[i].c++; // 未识别的词数量
         }
         // 标准差
-        assess[i].b += sp - w.w.length ** 2;
+        assess[i].b += Math.pow(sp - w.w.length, 2);
         prew = chunk[j];
       }
       // 如果句子中包含了至少一个动词
@@ -220,13 +226,13 @@ export default class DictTokenizer extends Module {
     // debug(ret);
     return ret;
   }
-  /**
-   * 将单词按照位置排列
-   *
-   * @param {array} words
-   * @param {string} text
-   * @return {object}
-   */
+
+  /* 将单词按照位置排列
+    *
+    * @param {array} words
+    * @param {string} text
+    * @return {object}
+    */
   static getPosInfo(words, text) {
     const wordpos = {};
     // 将单词按位置分组
@@ -246,13 +252,13 @@ export default class DictTokenizer extends Module {
     return wordpos;
   }
   /**
-   * 取所有分支
-   *
-   * @param {object} wordpos
-   * @param {int} pos 当前位置
-   * @param {string} text 本节要分词的文本
-   * @return {array}
-   */
+    * 取所有分支
+    *
+    * @param {object} wordpos
+    * @param {int} pos 当前位置
+    * @param {string} text 本节要分词的文本
+    * @return {array}
+    */
   static getChunks(wordpos, pos, text) {
     const words = wordpos[pos] || [];
     const ret = [];
@@ -272,11 +278,11 @@ export default class DictTokenizer extends Module {
     return ret;
   }
   /**
-   * 评价排名
-   *
-   * @param {object} assess
-   * @return {object}
-   */
+    * 评价排名
+    *
+    * @param {object} assess
+    * @return {object}
+    */
   static getTops(assess) {
     // 取各项最大值
     const top = {

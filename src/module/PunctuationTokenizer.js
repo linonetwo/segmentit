@@ -3,14 +3,13 @@ import Module from './BaseModule';
 import type { SegmentToken, TokenStartPosition } from './type';
 
 // 标点符号
-let _STOPWORD =
-  ' ,.;+-|/\\\'":?<>[]{}=!@#$%^&*()~`' +
-  '。，、＇：∶；?‘’“”〝〞ˆˇ﹕︰﹔﹖﹑·¨….¸;！´？！～—ˉ｜‖＂〃｀@﹫¡¿﹏﹋﹌︴々﹟#﹩$﹠&﹪%*﹡﹢﹦' +
-  '﹤‐￣¯―﹨ˆ˜﹍﹎+=<­＿_-ˇ~﹉﹊（）〈〉‹›﹛﹜『』〖〗［］《》〔〕{}「」【】︵︷︿︹︽_﹁﹃︻︶︸' +
-  '﹀︺︾ˉ﹂﹄︼＋－×÷﹢﹣±／＝≈≡≠∧∨∑∏∪∩∈⊙⌒⊥∥∠∽≌＜＞≤≥≮≯∧∨√﹙﹚[]﹛﹜∫∮∝∞⊙∏' +
-  '┌┬┐┏┳┓╒╤╕─│├┼┤┣╋┫╞╪╡━┃└┴┘┗┻┛╘╧╛┄┆┅┇╭─╮┏━┓╔╦╗┈┊│╳│┃┃╠╬╣┉┋╰─╯┗━┛' +
-  '╚╩╝╲╱┞┟┠┡┢┦┧┨┩┪╉╊┭┮┯┰┱┲┵┶┷┸╇╈┹┺┽┾┿╀╁╂╃╄╅╆' +
-  '○◇□△▽☆●◆■▲▼★♠♥♦♣☼☺◘♀√☻◙♂×▁▂▃▄▅▆▇█⊙◎۞卍卐╱╲▁▏↖↗↑←↔◤◥╲╱▔▕↙↘↓→↕◣◢∷▒░℡™';
+let _STOPWORD = ' ,.;+-|/\\\'":?<>[]{}=!@#$%^&*()~`' +
+                '。，、＇：∶；?‘’“”〝〞ˆˇ﹕︰﹔﹖﹑·¨….¸;！´？！～—ˉ｜‖＂〃｀@﹫¡¿﹏﹋﹌︴々﹟#﹩$﹠&﹪%*﹡﹢﹦' +
+                '﹤‐￣¯―﹨ˆ˜﹍﹎+=<­＿_-\ˇ~﹉﹊（）〈〉‹›﹛﹜『』〖〗［］《》〔〕{}「」【】︵︷︿︹︽_﹁﹃︻︶︸' +
+                '﹀︺︾ˉ﹂﹄︼＋－×÷﹢﹣±／＝≈≡≠∧∨∑∏∪∩∈⊙⌒⊥∥∠∽≌＜＞≤≥≮≯∧∨√﹙﹚[]﹛﹜∫∮∝∞⊙∏' +
+                '┌┬┐┏┳┓╒╤╕─│├┼┤┣╋┫╞╪╡━┃└┴┘┗┻┛╘╧╛┄┆┅┇╭─╮┏━┓╔╦╗┈┊│╳│┃┃╠╬╣┉┋╰─╯┗━┛' +
+                '╚╩╝╲╱┞┟┠┡┢┦┧┨┩┪╉╊┭┮┯┰┱┲┵┶┷┸╇╈┹┺┽┾┿╀╁╂╃╄╅╆' +
+                '○◇□△▽☆●◆■▲▼★♠♥♦♣☼☺◘♀√☻◙♂×▁▂▃▄▅▆▇█⊙◎۞卍卐╱╲▁▏↖↗↑←↔◤◥╲╱▔▕↙↘↓→↕◣◢∷▒░℡™';
 _STOPWORD = _STOPWORD.split('');
 const STOPWORD = {};
 const STOPWORD2 = {};
@@ -27,7 +26,7 @@ export default class PunctuationTokenizer extends Module {
   split(words: Array<SegmentToken>): Array<SegmentToken> {
     const POSTAG = this.segment.POSTAG;
     const ret = [];
-    for (var i = 0, word; (word = words[i]); i++) {
+    for (var i = 0, word; word = words[i]; i++) {
       if (word.p > 0) {
         ret.push(word);
         continue;
@@ -40,7 +39,7 @@ export default class PunctuationTokenizer extends Module {
       }
       // 分离出标点符号
       let lastc = 0;
-      for (var ui = 0, sw; (sw = stopinfo[ui]); ui++) {
+      for (var ui = 0, sw; sw = stopinfo[ui]; ui++) {
         if (sw.c > lastc) {
           ret.push({ w: word.w.substr(lastc, sw.c - lastc) });
         }
@@ -66,7 +65,7 @@ export default class PunctuationTokenizer extends Module {
    * @return {array}  返回格式   {w: '网址', c: 开始位置}
    */
   static matchStopword(text: string, cur: number): Array<TokenStartPosition> {
-    if (Number.isNaN(cur)) cur = 0;
+    if (isNaN(cur)) cur = 0;
     const ret = [];
     let isMatch = false;
     while (cur < text.length) {
@@ -81,7 +80,7 @@ export default class PunctuationTokenizer extends Module {
       cur += isMatch === false ? 1 : w.length;
       isMatch = false;
     }
-
+  
     return ret;
   }
 }

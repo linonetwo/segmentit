@@ -44,7 +44,7 @@ export default class WildcardTokenizer extends Module {
    * @return {array}  返回格式   {w: '单词', c: 开始位置}
    */
   matchWord(text: string, cur: number): Array<TokenStartPosition> {
-    if (Number.isNaN(cur)) cur = 0;
+    if (isNaN(cur)) cur = 0;
     const ret = [];
     const s = false;
     const TABLE = this.segment.getDict('WILDCARD2');

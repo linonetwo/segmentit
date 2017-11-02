@@ -37,21 +37,23 @@ export default class ChsNameTokenizer extends Module {
     }
     return ret;
   }
-  static matchName(text: string, startPosition: number): Array<TokenStartPosition> {
-    if (Number.isNaN(startPosition)) startPosition = 0;
-    const ret = [];
+  // 匹配包含的人名，并返回相关信息
+  static matchName(text: string, startPos: number): Array<TokenStartPosition> {
+    let startPosition = 0;
+    if (!isNaN(startPos)) startPosition = startPos;
+    const result = [];
     while (startPosition < text.length) {
-      // debug('cur=' + cur + ', ' + text.charAt(cur));
       let name = false;
-      // 复姓
+      // 取两个字，看看在不在复姓表里
       const f2 = text.substr(startPosition, 2);
       if (f2 in FAMILY_NAME_2) {
-        var n1 = text.charAt(startPosition + 2);
-        var n2 = text.charAt(startPosition + 3);
+        const n1 = text.charAt(startPosition + 2);
+        const n2 = text.charAt(startPosition + 3);
+        // 看看姓后面的字在不在名表里
         if (n1 in DOUBLE_NAME_1 && n2 in DOUBLE_NAME_2) {
           name = f2 + n1 + n2;
         } else if (n1 in SINGLE_NAME) {
-          name = f2 + n1 + (n1 == n2 ? n2 : '');
+          name = f2 + n1 + (n1 === n2 ? n2 : '');
         }
       }
       // 单姓
@@ -69,12 +71,10 @@ export default class ChsNameTokenizer extends Module {
       if (name === false) {
         startPosition++;
       } else {
-        ret.push({ w: name, c: startPosition });
+        result.push({ w: name, c: startPosition });
         startPosition += name.length;
       }
     }
-    return ret;
+    return result;
   }
 }
-
-// 匹配包含的人名，并返回相关信息

@@ -26,7 +26,7 @@ export default class ForeignTokenizer extends Module {
    */
   splitForeign(text: string, cur: number): Array<TokenStartPosition> {
     const POSTAG = this.segment.POSTAG;
-    if (Number.isNaN(cur)) cur = 0;
+    if (isNaN(cur)) cur = 0;
     const ret = [];
 
     // 取第一个字符的ASCII码
