@@ -1,19 +1,19 @@
 /** @flow */
 
 import assert from 'assert';
-import Segment, { useDefault } from '../src';
+import Segmentit, { useDefault } from '../src';
 
 describe('分词测试', () => {
-  let segment = null;
+  let segmentit = null;
 
   const toStringArray = arr => arr.map(w => w.w);
   const equal = (a, b) => {
-    const aString = toStringArray(segment.doSegment(a));
+    const aString = toStringArray(segmentit.doSegment(a));
     assert.equal(aString.toString('\t'), b.toString('\t'));
   };
 
   it('init', () => {
-    segment = useDefault(new Segment());
+    segmentit = useDefault(new Segmentit());
   });
 
   it('常用测试题目', () => {
@@ -127,26 +127,26 @@ describe('分词测试', () => {
   });
 
   it('options: simple=true', () => {
-    assert.equal(segment.doSegment('永和服装饰品有限公司', { simple: true }).join('\t'), ['永和', '服装', '饰品有限公司'].join('\t'));
+    assert.equal(segmentit.doSegment('永和服装饰品有限公司', { simple: true }).join('\t'), ['永和', '服装', '饰品有限公司'].join('\t'));
   });
 
   it('options: stripPunctuation=true', () => {
     assert.equal(
-      segment.doSegment('王五和张三丰、李强是谁', { simple: true, stripPunctuation: true }).join('\t'),
+      segmentit.doSegment('王五和张三丰、李强是谁', { simple: true, stripPunctuation: true }).join('\t'),
       ['王五', '和', '张三丰', '李强', '是谁'].join('\t'),
     );
   });
 
   it('options: convertSynonym=true', () => {
     assert.equal(
-      segment.doSegment('何时入睡', { simple: true, convertSynonym: true }).join('\t'),
+      segmentit.doSegment('何时入睡', { simple: true, convertSynonym: true }).join('\t'),
       ['什么时候', '入眠'].join('\t'),
     );
   });
 
   it('options: stripStopword=true', () => {
     assert.equal(
-      segment.doSegment('因为李三买了一张三角桌子', { simple: true, stripStopword: true }).join('\t'),
+      segmentit.doSegment('因为李三买了一张三角桌子', { simple: true, stripStopword: true }).join('\t'),
       ['李三', '买', '一张', '三角', '桌子'].join('\t'),
     );
   });
