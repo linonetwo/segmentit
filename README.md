@@ -37,10 +37,8 @@ const { useDefault, cnPOSTag, enPOSTag } = require('segmentit');
 
 const segmentit = useDefault(new Segmentit());
 
-console.log(segmentit.doSegment('因为李三买了一张三角桌子').map(w => cnPOSTag(w.p)))
-// ↑ [ '连词 连语素', '人名', '动词 动语素', '助词 助语素', '数量词', '数词 数语素', '名词 名语素' ]
-console.log(segmentit.doSegment('因为李三买了一张三角桌子').map(w => enPOSTag(w.p)))
-// ↑ [ 'c', 'nr', 'v', 'u', 'mq', 'm', 'n' ]
+console.log(segmentit.doSegment('一人得道，鸡犬升天').map(i => `${i.w} <${cnPOSTag(i.p)}> <${enPOSTag(i.p)}>`))
+// ↑ ["一人得道 <习语,数词 数语素> <l,m>", "， <标点符号> <w>", "鸡犬升天 <成语> <i>"]
 ```
 
 ## 只使用部分词典或使用自定义词典
