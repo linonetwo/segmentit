@@ -127,7 +127,7 @@ export function getPOSTagTranslator(POSTagDict: Object, I18NDict: Object): strin
   };
 }
 
-export const chinesePOSTag = getPOSTagTranslator(POSTAG, CN_POS_NAMES);
-export const englishPOSTag = getPOSTagTranslator(POSTAG, EN_POS_NAMES);
+export const cnPOSTag = getPOSTagTranslator(POSTAG, CN_POS_NAMES);
+export const enPOSTag = getPOSTagTranslator(POSTAG, EN_POS_NAMES);
 
 export default POSTAG;
