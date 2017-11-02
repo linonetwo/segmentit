@@ -38,8 +38,8 @@ export default class Segment {
     } else {
       // 初始化并注册模块
       if (typeof Module.init === "function") {
-        module.init(this);
-        this.modules[module.type].push(module);
+        Module.init(this);
+        this.modules[Module.type].push(Module);
       } else {
         const module = new Module(this);
         this.modules[module.type].push(module);

@@ -28,7 +28,7 @@ export default class SingleTokenizer extends Module {
    */
   splitSingle(text: string, cur: number): Array<TokenStartPosition> {
     const POSTAG = this.segment.POSTAG;
-    if (Number.isNaN(cur)) cur = 0;
+    if (isNaN(cur)) cur = 0;
     const ret = [];
     while (cur < text.length) {
       ret.push({

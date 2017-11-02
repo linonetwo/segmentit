@@ -151,7 +151,7 @@ export default class URLTokenizer extends Module {
    * @return {array}  返回格式   {w: '网址', c: 开始位置}
    */
   static matchURL(text: string, cur: number): Array<TokenStartPosition> {
-    if (Number.isNaN(cur)) cur = 0;
+    if (isNaN(cur)) cur = 0;
     const ret = [];
     let s = false;
     while (cur < text.length) {
@@ -185,4 +185,3 @@ export default class URLTokenizer extends Module {
     return ret;
   }
 }
-

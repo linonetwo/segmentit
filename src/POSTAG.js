@@ -111,7 +111,7 @@ const EN_POS_NAMES = {
 
 export function getPOSTagTranslator(POSTagDict: Object, I18NDict: Object): string {
   return (posTagNumber: number): string => {
-    if (Number.isNaN(posTagNumber)) {
+    if (isNaN(posTagNumber)) {
       return I18NDict[posTagNumber] || I18NDict.UNK;
     }
     const result = [];
