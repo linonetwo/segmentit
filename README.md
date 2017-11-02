@@ -24,6 +24,23 @@ console.log(result);
 
 [免费试用，永不收费](https://npm.runkit.com/segmentit)
 
+## 获取词类标注
+
+结巴分词风格的词类标注：
+
+```javascript
+import Segment, { useDefault, cnPOSTag, enPOSTag } from 'segmentit';
+// const Segmentit = require('segmentit').default;
+// const useDefault = require('segmentit').useDefault;
+
+const segmentit = useDefault(new Segmentit());
+
+segment.doSegment('因为李三买了一张三角桌子').map(w => cnPOSTag(w.p))
+// ↑ [ '连词 连语素', '人名', '动词 动语素', '助词 助语素', '数量词', '数词 数语素', '名词 名语素' ]
+segment.doSegment('因为李三买了一张三角桌子').map(w => enPOSTag(w.p))
+// ↑ [ 'c', 'nr', 'v', 'u', 'mq', 'm', 'n' ]
+```
+
 ## 只使用部分词典或使用自定义词典
 
 useDefault 的具体实现是这样的：
