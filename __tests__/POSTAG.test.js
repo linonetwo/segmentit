@@ -8,8 +8,6 @@ describe('词类测试', () => {
 
   it('init', () => {
     segment = useDefault(new Segment());
-    console.log(segment.doSegment('因为李三买了一张三角桌子').map(w => cnPOSTag(w.p)))
-    console.log(segment.doSegment('因为李三买了一张三角桌子').map(w => enPOSTag(w.p)))
   });
 
   it('中文词类标注', () => {
