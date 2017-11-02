@@ -1,87 +1,71 @@
 // @flow
+import Module from './BaseModule';
+import type { SegmentToken } from './type';
 
-/**
- * 日期时间优化模块
- *
- * @author 老雷<leizongmin@gmail.com>
- */
+// 日期时间常见组合
+const DATETIME_WORDS = ['世纪', '年', '年份', '年度', '月', '月份', '月度', '日', '号', '时', '点', '点钟', '分', '分钟', '秒', '毫秒'];
+const DATETIME = {};
+// eslint-disable-next-line
+for (const i in DATETIME_WORDS) {
+  DATETIME[DATETIME_WORDS[i]] = DATETIME_WORDS[i].length;
+}
 
-const debug = console.log;
+export default class DatetimeOptimizer extends Module {
+  type = 'optimizer';
 
-/** 模块类型 */
-exports.type = 'optimizer';
+  /**
+   * 日期时间优化
+   *
+   * @param {array} words 单词数组
+   * @param {bool} isNotFirst 是否为管理器调用的
+   * @return {array}
+   */
+  doOptimize(words: Array<SegmentToken>, isNotFirst: boolean): Array<SegmentToken> {
+    if (typeof isNotFirst === 'undefined') {
+      isNotFirst = false;
+    }
+    // 合并相邻的能组成一个单词的两个词
+    const TABLE = this.segment.getDict('TABLE');
+    const POSTAG = this.segment.POSTAG;
 
-/**
- * 模块初始化
- *
- * @param {Segment} segment 分词接口
- */
-exports.init = function (segment) {
-  exports.segment = segment;
-};
+    let i = 0;
+    let ie = words.length - 1;
+    while (i < ie) {
+      var w1 = words[i];
+      var w2 = words[i + 1];
+      // debug(w1.w + ', ' + w2.w);
 
-/**
- * 日期时间优化
- *
- * @param {array} words 单词数组
- * @param {bool} is_not_first 是否为管理器调用的
- * @return {array}
- */
-exports.doOptimize = function (words, is_not_first) {
-  if (typeof is_not_first === 'undefined') {
-    is_not_first = false;
-  }
-  // 合并相邻的能组成一个单词的两个词
-  const TABLE = exports.segment.getDict('TABLE');
-  const POSTAG = exports.segment.POSTAG;
-
-  let i = 0;
-  let ie = words.length - 1;
-  while (i < ie) {
-    var w1 = words[i];
-    var w2 = words[i + 1];
-    // debug(w1.w + ', ' + w2.w);
-
-    if ((w1.p & POSTAG.A_M) > 0) {
-      // =========================================
-      // 日期时间组合   数字 + 日期单位，如 “2005年"
-      if (w2.w in DATETIME) {
-        let nw = w1.w + w2.w;
-        let len = 2;
-        // 继续搜索后面连续的日期时间描述，必须符合  数字 + 日期单位
-        while (true) {
-          var w1 = words[i + len];
-          var w2 = words[i + len + 1];
-          if (w1 && w2 && (w1.p & POSTAG.A_M) > 0 && w2.w in DATETIME) {
-            len += 2;
-            nw += w1.w + w2.w;
-          } else {
-            break;
+      if ((w1.p & POSTAG.A_M) > 0) {
+        // =========================================
+        // 日期时间组合   数字 + 日期单位，如 “2005年"
+        if (w2.w in DATETIME) {
+          let nw = w1.w + w2.w;
+          let len = 2;
+          // 继续搜索后面连续的日期时间描述，必须符合  数字 + 日期单位
+          while (true) {
+            var w1 = words[i + len];
+            var w2 = words[i + len + 1];
+            if (w1 && w2 && (w1.p & POSTAG.A_M) > 0 && w2.w in DATETIME) {
+              len += 2;
+              nw += w1.w + w2.w;
+            } else {
+              break;
+            }
           }
+          words.splice(i, len, {
+            w: nw,
+            p: POSTAG.D_T,
+          });
+          ie -= len - 1;
+          continue;
         }
-        words.splice(i, len, {
-          w: nw,
-          p: POSTAG.D_T,
-        });
-        ie -= len - 1;
-        continue;
+        // =========================================
       }
-      // =========================================
+
+      // 移到下一个词
+      i++;
     }
 
-    // 移到下一个词
-    i++;
+    return words;
   }
-
-  return words;
-};
-
-// ====================================================
-// 日期时间常见组合
-const _DATETIME = [
-  '世纪', '年', '年份', '年度', '月', '月份', '月度', '日', '号',
-  '时', '点', '点钟', '分', '分钟', '秒', '毫秒',
-];
-var DATETIME = {};
-for (const i in _DATETIME) DATETIME[_DATETIME[i]] = _DATETIME[i].length;
-// ====================================================
+}

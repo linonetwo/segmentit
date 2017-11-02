@@ -31,14 +31,19 @@ export default class Segment {
  * @param {String|Array|Object} module 模块名称(数组)或模块对象
  * @return {Segment}
  */
-  use = (module: Array | Object): Segment => {
+  use = (Module: Array | Object): Segment => {
     // 传入列表的话就递归调用
-    if (Array.isArray(module)) {
-      module.forEach(this.use);
+    if (Array.isArray(Module)) {
+      Module.forEach(this.use);
     } else {
       // 初始化并注册模块
-      module.init(this);
-      this.modules[module.type].push(module);
+      if (typeof Module.init === "function") {
+        module.init(this);
+        this.modules[module.type].push(module);
+      } else {
+        const module = new Module(this);
+        this.modules[module.type].push(module);
+      }
     }
 
     return this;
