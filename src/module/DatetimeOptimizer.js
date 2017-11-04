@@ -1,5 +1,5 @@
 // @flow
-import Module from './BaseModule';
+import { Optimizer } from './BaseModule';
 import type { SegmentToken } from './type';
 
 // 日期时间常见组合
@@ -10,9 +10,7 @@ for (const i in DATETIME_WORDS) {
   DATETIME[DATETIME_WORDS[i]] = DATETIME_WORDS[i].length;
 }
 
-export default class DatetimeOptimizer extends Module {
-  type = 'optimizer';
-
+export default class DatetimeOptimizer extends Optimizer {
   /**
    * 日期时间优化
    *

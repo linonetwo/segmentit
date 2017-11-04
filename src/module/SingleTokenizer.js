@@ -1,10 +1,9 @@
 // @flow
-import Module from './BaseModule';
+import { Tokenizer } from './BaseModule';
 import type { SegmentToken, TokenStartPosition } from './type';
 
 // 单字切分模块
-export default class SingleTokenizer extends Module {
-  type = 'tokenizer';
+export default class SingleTokenizer extends Tokenizer {
   split(words: Array<SegmentToken>): Array<SegmentToken> {
     const POSTAG = this.segment.POSTAG;
     let ret = [];

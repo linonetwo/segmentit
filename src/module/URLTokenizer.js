@@ -1,7 +1,6 @@
 // @flow
-import Module from './BaseModule';
+import { Tokenizer } from './BaseModule';
 import type { SegmentToken, TokenStartPosition } from './type';
-
 
 // 协议URL头
 const PROTOTAL = ['http://', 'https://', 'ftp://', 'news://', 'telnet://'];
@@ -109,8 +108,7 @@ for (var i in _URLCHAR) {
   URLCHAR[_URLCHAR[i]] = 1;
 }
 
-export default class URLTokenizer extends Module {
-  type = 'tokenizer';
+export default class URLTokenizer extends Tokenizer {
   split(words: Array<SegmentToken>): Array<SegmentToken> {
     const POSTAG = this.segment.POSTAG;
     const ret = [];
@@ -142,7 +140,7 @@ export default class URLTokenizer extends Module {
     // debug(ret);
     return ret;
   }
-  
+
   /**
    * 匹配包含的网址，返回相关信息
    *
@@ -181,7 +179,7 @@ export default class URLTokenizer extends Module {
         c: s,
       });
     }
-  
+
     return ret;
   }
 }

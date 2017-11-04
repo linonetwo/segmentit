@@ -1,10 +1,8 @@
 // @flow
-import Module from './BaseModule';
+import { Optimizer } from './BaseModule';
 import type { SegmentToken } from './type';
 
-export default class DictOptimizer extends Module {
-  type = 'optimizer';
-
+export default class DictOptimizer extends Optimizer {
   /**
    * 词典优化
    *

@@ -1,12 +1,10 @@
 // @flow
-import Module from './BaseModule';
+import { Optimizer } from './BaseModule';
 import type { SegmentToken } from './type';
 
 import { FAMILY_NAME_1, FAMILY_NAME_2, SINGLE_NAME, DOUBLE_NAME_1, DOUBLE_NAME_2 } from './CHS_NAMES';
 
-export default class ChsNameOptimizer extends Module {
-  type = 'optimizer'
-
+export default class ChsNameOptimizer extends Optimizer {
   doOptimize(words: Array<SegmentToken>): Array<SegmentToken> {
     const POSTAG = this.segment.POSTAG;
     let i = 0;

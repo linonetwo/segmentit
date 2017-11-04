@@ -1,12 +1,10 @@
 // @flow
-import Module from './BaseModule';
+import { Tokenizer } from './BaseModule';
 import type { SegmentToken, TokenStartPosition } from './type';
 
 import { FAMILY_NAME_1, FAMILY_NAME_2, SINGLE_NAME, DOUBLE_NAME_1, DOUBLE_NAME_2 } from './CHS_NAMES';
 
-export default class ChsNameTokenizer extends Module {
-  type = 'tokenizer';
-
+export default class ChsNameTokenizer extends Tokenizer {
   split(words: Array<SegmentToken>): Array<SegmentToken> {
     const POSTAG = this.segment.POSTAG;
     const ret = [];

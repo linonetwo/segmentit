@@ -1,9 +1,8 @@
 // @flow
-import Module from './BaseModule';
+import { Tokenizer } from './BaseModule';
 import type { SegmentToken, TokenStartPosition } from './type';
 
-export default class ForeignTokenizer extends Module {
-  type = 'tokenizer';
+export default class ForeignTokenizer extends Tokenizer {
   split(words: Array<SegmentToken>): Array<SegmentToken> {
     const POSTAG = this.segment.POSTAG;
     let ret = [];
@@ -37,9 +36,10 @@ export default class ForeignTokenizer extends Module {
     if (c >= 65296 && c <= 65370) c -= 65248;
     // 数字  lasttype = POSTAG.A_M
     if (c >= 48 && c <= 57) lasttype = POSTAG.A_M;
-    else if ((c >= 65 && c <= 90) || (c >= 97 && c <= 122))
-    // 字母 lasttype = POSTAG.A_NX
-    { lasttype = POSTAG.A_NX; } else lasttype = POSTAG.UNK;
+    else if ((c >= 65 && c <= 90) || (c >= 97 && c <= 122)) {
+      // 字母 lasttype = POSTAG.A_NX
+      lasttype = POSTAG.A_NX;
+    } else lasttype = POSTAG.UNK;
 
     for (var i = 1; i < text.length; i++) {
       var c = text.charCodeAt(i);
