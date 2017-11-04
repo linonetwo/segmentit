@@ -91,6 +91,48 @@ segmentit.loadSynonymDict(synonym);
 segmentit.loadStopwordDict(stopword);
 ```
 
+## 创造自己的分词中间件（Tokenizer）和结果优化器（Optimizer）
+
+### Tokenizer
+
+Tokenizer 是分词时要经过的一个个中间件，类似于 Redux 的 MiddleWare，它的 split 函数接受分词分到一半的 token 数组，返回一个同样格式的 token 数组（这也就是不要对太长的文本分词的原因，不然这个数组会巨爆大）。
+
+例子如下：
+
+```javascript
+// @flow
+import { Tokenizer } from 'segmentit';
+import type { SegmentToken, TokenStartPosition } from 'segmentit';
+export default class ChsNameTokenizer extends Tokenizer {
+  split(words: Array<SegmentToken>): Array<SegmentToken> {
+    // 可以获取到 this.segment 里的各种信息
+    const POSTAG = this.segment.POSTAG;
+    const TABLE = this.segment.getDict('TABLE');
+    // ...
+  }
+```
+
+### Optimizer
+
+Optimizer 是在分词结束后，发现有些难以利用字典处理的情况，却可以用启发式规则处理时，可以放这些启发式规则的地方，它的 doOptimize 函数同样接收一个 token 数组，返回一个同样格式的 token 数组。
+
+除了 token 数组以外，你还可以自定义余下的参数，比如在下面的例子里，我们会递归调用自己一次，通过第二个参数判断递归深度：
+
+```javascript
+// @flow
+import { Optimizer } from './BaseModule';
+import type { SegmentToken } from './type';
+export default class DictOptimizer extends Optimizer {
+  doOptimize(words: Array<SegmentToken>, isNotFirst: boolean): Array<SegmentToken> {
+    // 可以获取到 this.segment 里的各种信息
+    const POSTAG = this.segment.POSTAG;
+    const TABLE = this.segment.getDict('TABLE');
+    // ...
+    // 针对组合数字后无法识别新组合的数字问题，需要重新扫描一次
+    return isNotFirst === true ? words : this.doOptimize(words, true);
+  }
+```
+
 ## License
 
 MIT LICENSED
