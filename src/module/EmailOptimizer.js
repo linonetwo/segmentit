@@ -1,5 +1,5 @@
 // @flow
-import Module from './BaseModule';
+import { Optimizer } from './BaseModule';
 import type { SegmentToken } from './type';
 
 // 邮箱地址中允许出现的字符
@@ -8,8 +8,7 @@ const _EMAILCHAR = '!"#$%&\'*+-/0123456789=?@ABCDEFGHIJKLMNOPQRSTUVWXYZ^_`abcdef
 const EMAILCHAR = {};
 for (const i in _EMAILCHAR) EMAILCHAR[_EMAILCHAR[i]] = 1;
 
-export default class EmailOptimizer extends Module {
-  type = 'optimizer';
+export default class EmailOptimizer extends Optimizer {
   doOptimize(words: Array<SegmentToken>): Array<SegmentToken> {
     const POSTAG = this.segment.POSTAG;
     // debug(words);

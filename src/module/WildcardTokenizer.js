@@ -1,10 +1,9 @@
 // @flow
-import Module from './BaseModule';
+import { Tokenizer } from './BaseModule';
 import type { SegmentToken, TokenStartPosition } from './type';
 
 // 通配符识别模块
-export default class WildcardTokenizer extends Module {
-  type = 'tokenizer';
+export default class WildcardTokenizer extends Tokenizer {
   split(words: Array<SegmentToken>): Array<SegmentToken> {
     const POSTAG = this.segment.POSTAG;
     const TABLE = this.segment.getDict('WILDCARD');

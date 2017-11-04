@@ -1,5 +1,5 @@
 // @flow
-import Module from './BaseModule';
+import { Tokenizer } from './BaseModule';
 import { FAMILY_NAME_1, FAMILY_NAME_2 } from './CHS_NAMES';
 import type { SegmentToken, TokenStartPosition } from './type';
 
@@ -14,8 +14,7 @@ for (const i in _DATETIME) DATETIME[_DATETIME[i]] = _DATETIME[i].length;
  * @param {array} words 单词数组
  * @return {array}
  */
-export default class DictTokenizer extends Module {
-  type = 'tokenizer';
+export default class DictTokenizer extends Tokenizer {
   split(words: Array<SegmentToken>): Array<SegmentToken> {
     // debug(words);
     const POSTAG = this.segment.POSTAG;
