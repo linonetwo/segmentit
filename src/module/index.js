@@ -42,3 +42,5 @@ export const modules = [
   DictOptimizer, // 词典识别优化
   DatetimeOptimizer, // 日期时间识别优化
 ];
+
+export { Module, Tokenizer, Optimizer } from './BaseModule';
