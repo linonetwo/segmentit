@@ -8,6 +8,9 @@ export { useDefault };
 export { POSTAG, getPOSTagTranslator, cnPOSTag, enPOSTag } from './POSTAG';
 export {
   modules,
+  Module,
+  Tokenizer,
+  Optimizer,
   CHS_NAMES,
   ChsNameTokenizer,
   DictOptimizer,
