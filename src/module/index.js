@@ -44,3 +44,4 @@ export const modules = [
 ];
 
 export { Module, Tokenizer, Optimizer } from './BaseModule';
+export type { SegmentToken, TokenStartPosition } from './type';

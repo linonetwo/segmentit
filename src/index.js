@@ -37,3 +37,5 @@ export {
   synonyms,
   stopwords,
 } from './knowledge';
+
+export type { SegmentToken, TokenStartPosition } from './module';
