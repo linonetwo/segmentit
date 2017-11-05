@@ -91,6 +91,8 @@ segmentit.loadSynonymDict(synonym);
 segmentit.loadStopwordDict(stopword);
 ```
 
+盘古的词典比较复古了，像「软萌萝莉」这种词都是没有的，请有能力的朋友 PR 一下自己的词库。
+
 ## 创造自己的分词中间件（Tokenizer）和结果优化器（Optimizer）
 
 ### Tokenizer
