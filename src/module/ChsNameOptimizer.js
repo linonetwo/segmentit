@@ -18,7 +18,7 @@ export default class ChsNameOptimizer extends Optimizer {
         // 如果为  "小|老" + 姓
         if (
           nextword &&
-          (word.w == '小' || word.w == '老') &&
+          (word.w === '小' || word.w === '老') &&
           (nextword.w in FAMILY_NAME_1 || nextword.w in FAMILY_NAME_2)
         ) {
           words.splice(i, 2, {

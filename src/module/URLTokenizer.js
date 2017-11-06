@@ -156,7 +156,7 @@ export default class URLTokenizer extends Tokenizer {
       // 判断是否为 http:// 之类的文本开头
       if (s === false && cur < text.length - MIN_PROTOTAL_LEN) {
         for (var i = 0, prot; (prot = PROTOTAL[i]); i++) {
-          if (text.substr(cur, prot.length) == prot) {
+          if (text.substr(cur, prot.length) === prot) {
             s = cur;
             cur += prot.length - 1;
             break;

@@ -179,12 +179,12 @@ export default class DictTokenizer extends Tokenizer {
                 nextw.p = TABLE[nextw.w].p;
               }
               // 如果是连词，前后两个词词性相同则加分
-              if ((w.p & POSTAG.D_C) > 0 && prew.p == nextw.p) {
+              if ((w.p & POSTAG.D_C) > 0 && prew.p === nextw.p) {
                 assess[i].d++;
               }
               // 如果当前是“的”+ 名词，则加分
               if (
-                (w.w == '的' || w.w == '之') &&
+                (w.w === '的' || w.w === '之') &&
                 ((nextw.p & POSTAG.D_N) > 0 ||
                   (nextw.p & POSTAG.A_NR) > 0 ||
                   (nextw.p & POSTAG.A_NS) > 0 ||
@@ -326,7 +326,7 @@ export default class DictTokenizer extends Tokenizer {
       if (s > maxs) {
         curri = i;
         maxs = s;
-      } else if (s == maxs) {
+      } else if (s === maxs) {
         // 如果分数相同，则根据词长度、未识别词个数和平均频率来选择
         let a = 0;
         let b = 0;

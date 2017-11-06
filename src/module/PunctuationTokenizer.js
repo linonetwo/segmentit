@@ -15,7 +15,7 @@ _STOPWORD = _STOPWORD.split('');
 const STOPWORD = {};
 const STOPWORD2 = {};
 for (const i in _STOPWORD) {
-  if (_STOPWORD[i] == '') continue;
+  if (_STOPWORD[i] === '') continue;
   const len = _STOPWORD[i].length;
   STOPWORD[_STOPWORD[i]] = len;
   if (!STOPWORD2[len]) STOPWORD2[len] = {};

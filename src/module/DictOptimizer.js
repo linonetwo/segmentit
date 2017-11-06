@@ -29,7 +29,7 @@ export default class DictOptimizer extends Optimizer {
       // ==========================================
       // 能组成一个新词的(词性必须相同)
       const nw = w1.w + w2.w;
-      if (w1.p == w2.p && nw in TABLE) {
+      if (w1.p === w2.p && nw in TABLE) {
         words.splice(i, 2, {
           w: nw,
           p: TABLE[nw].p,
@@ -53,7 +53,7 @@ export default class DictOptimizer extends Optimizer {
       if ((w1.p & POSTAG.A_M) > 0) {
         // debug(w2.w + ' ' + (w2.p & POSTAG.A_M));
         // 百分比数字 如 10%，或者下一个词也是数词，则合并
-        if ((w2.p & POSTAG.A_M) > 0 || w2.w == '%') {
+        if ((w2.p & POSTAG.A_M) > 0 || w2.w === '%') {
           words.splice(i, 2, {
             w: w1.w + w2.w,
             p: POSTAG.A_M,
@@ -73,7 +73,7 @@ export default class DictOptimizer extends Optimizer {
         // 带小数点的数字 ，如 “3 . 14”，或者 “十五点三”
         // 数词 + "分之" + 数词，如“五十分之一”
         var w3 = words[i + 2];
-        if (w3 && (w3.p & POSTAG.A_M) > 0 && (w2.w == '.' || w2.w == '点' || w2.w == '分之')) {
+        if (w3 && (w3.p & POSTAG.A_M) > 0 && (w2.w === '.' || w2.w === '点' || w2.w === '分之')) {
           words.splice(i, 3, {
             w: w1.w + w2.w + w3.w,
             p: POSTAG.A_M,

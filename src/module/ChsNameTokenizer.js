@@ -62,7 +62,7 @@ export default class ChsNameTokenizer extends Tokenizer {
         if (n1 in DOUBLE_NAME_1 && n2 in DOUBLE_NAME_2) {
           name = f1 + n1 + n2;
         } else if (n1 in SINGLE_NAME) {
-          name = f1 + n1 + (n1 == n2 ? n2 : '');
+          name = f1 + n1 + (n1 === n2 ? n2 : '');
         }
       }
       // 检查是否匹配成功

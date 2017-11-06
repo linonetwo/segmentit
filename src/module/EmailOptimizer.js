@@ -19,7 +19,7 @@ export default class EmailOptimizer extends Optimizer {
     let has_at = false;
     while (i < ie) {
       var word = words[i];
-      var is_ascii = !!(word.p == POSTAG.A_NX || (word.p == POSTAG.A_M && word.w.charCodeAt(0) < 128));
+      var is_ascii = !!(word.p === POSTAG.A_NX || (word.p === POSTAG.A_M && word.w.charCodeAt(0) < 128));
 
       // 如果是外文字符或者数字，符合电子邮件地址开头的条件
       if (addr_start === false && is_ascii) {
@@ -28,7 +28,7 @@ export default class EmailOptimizer extends Optimizer {
         continue;
       } else {
         // 如果遇到@符号，符合第二个条件
-        if (has_at === false && word.w == '@') {
+        if (has_at === false && word.w === '@') {
           has_at = true;
           i++;
           continue;
@@ -62,7 +62,7 @@ export default class EmailOptimizer extends Optimizer {
     // 检查剩余部分
     if (addr_start && has_at && words[ie]) {
       var word = words[ie];
-      var is_ascii = !!(word.p == POSTAG.A_NX || (word.p == POSTAG.A_M && word.w in EMAILCHAR));
+      var is_ascii = !!(word.p === POSTAG.A_NX || (word.p === POSTAG.A_M && word.w in EMAILCHAR));
       if (is_ascii) {
         var mailws = words.slice(addr_start, words.length);
         words.splice(addr_start, mailws.length, {

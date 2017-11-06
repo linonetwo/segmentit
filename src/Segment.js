@@ -260,7 +260,7 @@ export default class Segment {
     const f = typeof s === 'string' ? 'w' : 'p';
 
     while (i < words.length) {
-      if (words[i][f] == s) {
+      if (words[i][f] === s) {
         if (lasti < i) ret.push(words.slice(lasti, i));
         ret.push(words.slice(i, i + 1));
         i++;
@@ -289,7 +289,7 @@ export default class Segment {
     const f = typeof s === 'string' ? 'w' : 'p';
 
     while (cur < words.length) {
-      if (words[cur][f] == s) return cur;
+      if (words[cur][f] === s) return cur;
       cur++;
     }
 
