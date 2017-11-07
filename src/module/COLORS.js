@@ -703,7 +703,7 @@ export const COLOR_WITH_RGB: string[][] = [
   ['暗灰色', '#404040', '64,64,64'],
 ];
 
-export const singleWordColors: string[] = [
+export const colors: string[] = [
   '赤',
   '朱',
   '丹',
@@ -743,4 +743,5 @@ export const singleWordColors: string[] = [
   '苍',
   '华',
   '银',
+  ...COLOR_WITH_RGB.map(item => item[0]),
 ];

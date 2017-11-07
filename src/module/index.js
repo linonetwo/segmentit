@@ -1,4 +1,5 @@
 // @flow
+import AdjectiveOptimizer from './AdjectiveOptimizer';
 import CHS_NAMES from './CHS_NAMES';
 import ChsNameTokenizer from './ChsNameTokenizer';
 import DictOptimizer from './DictOptimizer';
@@ -13,6 +14,7 @@ import SingleTokenizer from './SingleTokenizer';
 import WildcardTokenizer from './WildcardTokenizer';
 
 export {
+  AdjectiveOptimizer,
   CHS_NAMES,
   ChsNameTokenizer,
   DictOptimizer,
@@ -41,6 +43,7 @@ export const modules = [
   ChsNameOptimizer, // 人名识别优化
   DictOptimizer, // 词典识别优化
   DatetimeOptimizer, // 日期时间识别优化
+  AdjectiveOptimizer,
 ];
 
 export { Module, Tokenizer, Optimizer } from './BaseModule';
