@@ -18,7 +18,7 @@ export default class AdjectiveOptimizer extends Optimizer {
           word.p = POSTAG.D_A;
         }
         // 如果是连续的两个名词，前一个是颜色，那这个颜色也是形容词
-        if (word.p === POSTAG.D_N && nextword.p === POSTAG.D_N && colors.includes(word.w)) {
+        if (word.p === POSTAG.D_N && this.isNominal(nextword.p) && colors.includes(word.w)) {
           word.p = POSTAG.D_A;
         }
       }
@@ -26,5 +26,21 @@ export default class AdjectiveOptimizer extends Optimizer {
       index += 1;
     }
     return words;
+  }
+
+  isNominal(pos: number | number[]): boolean {
+    if (Array.isArray(pos)) {
+      return this.isNominal(pos[0]);
+    }
+    const { POSTAG } = this.segment;
+    return (
+      pos === POSTAG.D_N ||
+      pos === POSTAG.A_NT ||
+      pos === POSTAG.A_NX ||
+      pos === POSTAG.A_NZ ||
+      pos === POSTAG.A_NR ||
+      pos === POSTAG.A_NS ||
+      pos === POSTAG.URL
+    );
   }
 }
