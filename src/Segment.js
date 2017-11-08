@@ -181,7 +181,8 @@ export default class Segment {
     // 将文本按照换行符分割成多段，并逐一分词
     text
       .replace(/\r/g, '\n')
-      .split(/(\n|\s)+/)
+      // 用换行符和空格把长文本切小，以减小传入中间件的数组长度
+      .split(/\n+/)
       .forEach(section => {
         var section = section.trim();
         if (section.length < 1) return;
