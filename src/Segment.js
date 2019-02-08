@@ -12,7 +12,7 @@ import Optimizer from './Optimizer';
 
 /**
  * 创建分词器接口
-*/
+ */
 export default class Segment {
   constructor() {
     this.POSTAG = POSTAG; // 词性
@@ -26,11 +26,11 @@ export default class Segment {
   }
 
   /**
- * 载入分词模块
- *
- * @param {String|Array|Object} module 模块名称(数组)或模块对象
- * @return {Segment}
- */
+   * 载入分词模块
+   *
+   * @param {String|Array|Object} module 模块名称(数组)或模块对象
+   * @return {Segment}
+   */
   use = (Module: Array | Object): Segment => {
     // 传入列表的话就递归调用
     if (Array.isArray(Module)) {
@@ -50,14 +50,18 @@ export default class Segment {
   };
 
   /**
- * 载入字典文件
- *
- * @param {String} name 字典文件名
- * @param {String} type 类型
- * @param {Boolean} convertToLower 是否全部转换为小写
- * @return {Segment}
- */
-  loadDict = (dict: string | string[], type = 'TABLE', convertToLower: boolean = false): Segment => {
+   * 载入字典文件
+   *
+   * @param {String} name 字典文件名
+   * @param {String} type 类型
+   * @param {Boolean} convertToLower 是否全部转换为小写
+   * @return {Segment}
+   */
+  loadDict = (
+    dict: string | string[],
+    type = 'TABLE',
+    convertToLower: boolean = false,
+  ): Segment => {
     if (Array.isArray(dict)) {
       dict.forEach(d => this.loadDict(d));
     } else {
@@ -94,18 +98,18 @@ export default class Segment {
   };
 
   /**
- * 取词典表
- *
- * @param {String} type 类型
- * @return {object}
- */
+   * 取词典表
+   *
+   * @param {String} type 类型
+   * @return {object}
+   */
   getDict = (type: string) => this.DICT[type];
 
   /**
- * 载入同义词词典
- *
- * @param {Object} dict 字典文件
- */
+   * 载入同义词词典
+   *
+   * @param {Object} dict 字典文件
+   */
   loadSynonymDict = (dict: string | string[]): Segment => {
     if (Array.isArray(dict)) {
       dict.forEach(d => this.loadSynonymDict(d));
@@ -135,10 +139,10 @@ export default class Segment {
   };
 
   /**
- * 载入停止符词典
- *
- * @param {Object} dict 字典文件
- */
+   * 载入停止符词典
+   *
+   * @param {Object} dict 字典文件
+   */
   loadStopwordDict = (dict: string | string[]): Segment => {
     if (Array.isArray(dict)) {
       dict.forEach(d => this.loadStopwordDict(d));
@@ -163,16 +167,16 @@ export default class Segment {
   };
 
   /**
- * 开始分词
- *
- * @param {String} text 文本
- * @param {Object} options 选项
- *   - {Boolean} simple 是否仅返回单词内容
- *   - {Boolean} stripPunctuation 去除标点符号
- *   - {Boolean} convertSynonym 转换同义词
- *   - {Boolean} stripStopword 去除停止符
- * @return {Array}
- */
+   * 开始分词
+   *
+   * @param {String} text 文本
+   * @param {Object} options 选项
+   *   - {Boolean} simple 是否仅返回单词内容
+   *   - {Boolean} stripPunctuation 去除标点符号
+   *   - {Boolean} convertSynonym 转换同义词
+   *   - {Boolean} stripStopword 去除停止符
+   * @return {Array}
+   */
   doSegment = (text, options) => {
     const me = this;
     options = options || {};
@@ -238,22 +242,22 @@ export default class Segment {
   };
 
   /**
- * 将单词数组连接成字符串
- *
- * @param {Array} words 单词数组
- * @return {String}
- */
+   * 将单词数组连接成字符串
+   *
+   * @param {Array} words 单词数组
+   * @return {String}
+   */
   toString(words) {
     return words.map(item => item.w).join('');
   }
 
   /**
- * 根据某个单词或词性来分割单词数组
- *
- * @param {Array} words 单词数组
- * @param {Number|String} s 用于分割的单词或词性
- * @return {Array}
- */
+   * 根据某个单词或词性来分割单词数组
+   *
+   * @param {Array} words 单词数组
+   * @param {Number|String} s 用于分割的单词或词性
+   * @return {Array}
+   */
   split(words, s) {
     const ret = [];
     let lasti = 0;
@@ -278,13 +282,13 @@ export default class Segment {
   }
 
   /**
- * 在单词数组中查找某一个单词或词性所在的位置
- *
- * @param {Array} words 单词数组
- * @param {Number|String} s 要查找的单词或词性
- * @param {Number} cur 开始位置
- * @return {Number} 找不到，返回-1
- */
+   * 在单词数组中查找某一个单词或词性所在的位置
+   *
+   * @param {Array} words 单词数组
+   * @param {Number|String} s 要查找的单词或词性
+   * @param {Number} cur 开始位置
+   * @return {Number} 找不到，返回-1
+   */
   indexOf(words, s, cur) {
     cur = isNaN(cur) ? 0 : cur;
     const f = typeof s === 'string' ? 'w' : 'p';

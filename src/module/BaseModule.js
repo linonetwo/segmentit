@@ -1,5 +1,5 @@
 // @flow
-import Segment from '..';
+import Segment from '../Segment';
 
 export class Module {
   type: 'optimizer' | 'tokenizer';
