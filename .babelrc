@@ -12,5 +12,6 @@
       }
     ],
     "static-fs"
+    "macros"
   ]
 }
