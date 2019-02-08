@@ -1,10 +1,12 @@
-# 中文分词模块
-
+<p>
 [![npm version](https://badge.fury.io/js/segmentit.svg)](https://badge.fury.io/js/segmentit)
 
 [![Coverage Status](https://coveralls.io/repos/github/linonetwo/segmentit/badge.svg?branch=master)](https://coveralls.io/github/linonetwo/segmentit?branch=master)
 
 [![Min Zip Size](https://img.shields.io/bundlephobia/minzip/segmentit.svg)](https://img.shields.io/bundlephobia/minzip/segmentit.svg)
+</p>
+
+# 中文分词模块
 
 本模块基于 [node-segment](https://github.com/leizongmin/node-segment) 魔改，增加了 electron、浏览器支持，并准备针对 electron 多线程运行环境进行优化。
 
