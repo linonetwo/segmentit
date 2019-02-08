@@ -38,7 +38,7 @@
     "test:watch": "jest --watch",
     "prepare": "npm run build",
     "prepublishOnly": "npm run test",
-    "build": "babel src -d dist",
+    "build": "npm run clean && babel src -d dist",
     "build:watch": "babel --watch src -d dist"
   },
   "author": "Lei Zongmin <leizongmin@gmail.com>",
@@ -86,7 +86,7 @@
     "flow-typed": "^2.5.1",
     "jest": "~24.1.0",
     "mocha": "5.2.0",
-    "should": "13.2.3",
     "rimraf": "^2.6.3",
+    "should": "13.2.3"
   }
 }

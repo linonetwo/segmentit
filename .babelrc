@@ -1,5 +1,13 @@
 {
-  "presets": ["@babel/env", "@babel/preset-flow"],
+  "presets": [[
+    "@babel/preset-env",
+    {
+      "targets": {
+        "esmodules": true
+      },
+      "modules": "false"
+    }
+  ], "@babel/preset-flow"],
   "plugins": [
     "@babel/plugin-proposal-class-properties",
     [
@@ -8,7 +16,7 @@
         "corejs": false,
         "helpers": true,
         "regenerator": true,
-        "useESModules": false
+        "useESModules": true
       }
     ],
     "macros"
