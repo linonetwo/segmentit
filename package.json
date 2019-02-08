@@ -6,7 +6,7 @@
   "files": [
     "dist"
   ],
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Chinese word segmentation 中文分词模块 with browser && electron support",
   "keywords": [
     "segment",
