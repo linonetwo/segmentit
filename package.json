@@ -1,6 +1,8 @@
 {
   "name": "segmentit",
-  "main": "./dist/index.js",
+  "main": "dist/cjs",
+  "module": "dist/esm/segmentit.js",
+  "browser": "dist/umd/segmentit.js",
   "version": "1.1.5",
   "description": "Chinese word segmentation 中文分词模块 with browser && electron support",
   "keywords": [
@@ -38,7 +40,7 @@
     "test:watch": "jest --watch",
     "prepare": "npm run build",
     "prepublishOnly": "npm run test",
-    "build": "npm run clean && babel src -d dist",
+    "build": "NODE_ENV=production && npm run clean && rollup -c",
     "build:watch": "babel --watch src -d dist"
   },
   "author": "Lei Zongmin <leizongmin@gmail.com>",
@@ -87,6 +89,12 @@
     "jest": "~24.1.0",
     "mocha": "5.2.0",
     "rimraf": "^2.6.3",
-    "should": "13.2.3"
+    "rollup": "^1.1.2",
+    "rollup-plugin-babel": "^4.3.2",
+    "rollup-plugin-commonjs": "^9.2.0",
+    "rollup-plugin-replace": "^2.1.0",
+    "rollup-plugin-uglify": "^6.0.2",
+    "should": "13.2.3",
+    "uglify-es": "^3.3.9"
   }
 }
