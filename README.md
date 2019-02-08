@@ -1,16 +1,22 @@
 <p>
-[![npm version](https://badge.fury.io/js/segmentit.svg)](https://badge.fury.io/js/segmentit)
+<a href='https://badge.fury.io/js/segmentit' style='margin: 0 0.5rem;'>
+<img src='https://badge.fury.io/js/segmentit.svg' alt='npm version' height='18'/>
+</a>
 
-[![Coverage Status](https://coveralls.io/repos/github/linonetwo/segmentit/badge.svg?branch=master)](https://coveralls.io/github/linonetwo/segmentit?branch=master)
+<a href='https://coveralls.io/github/linonetwo/segmentit?branch=master' style='margin: 0 0.5rem;'>
+<img src='https://coveralls.io/repos/github/linonetwo/segmentit/badge.svg?branch=master' alt='Coverage Status' height='18'/>
+</a>
 
-[![Min Zip Size](https://img.shields.io/bundlephobia/minzip/segmentit.svg)](https://img.shields.io/bundlephobia/minzip/segmentit.svg)
-</p>
+<a href='https://img.shields.io/bundlephobia/minzip/segmentit.svg' style='margin: 0 0.5rem;'>
+<img src='https://img.shields.io/bundlephobia/minzip/segmentit.svg' alt='Min Zip Size' height='18'/>
+</a>
+<p>
 
 # 中文分词模块
 
 本模块基于 [node-segment](https://github.com/leizongmin/node-segment) 魔改，增加了 electron、浏览器支持，并准备针对 electron 多线程运行环境进行优化。
 
-之所以要花时间魔改，是因为 ```segment``` 和 ```nodejieba``` 虽然在 node 环境下很好用，但根本无法在浏览器和 electron 环境下运行。我把代码重构为 ES2015，并用 babel 插件内联了字典文件，全部载入的话大小是 3.8M，但如果有些字典你并不需要，字典和模块是支持 tree shaking 的（请使用 ESM 模块）。
+之所以要花时间魔改，是因为 `segment` 和 `nodejieba` 虽然在 node 环境下很好用，但根本无法在浏览器和 electron 环境下运行。我把代码重构为 ES2015，并用 babel 插件内联了字典文件，全部载入的话大小是 3.8M，但如果有些字典你并不需要，字典和模块是支持 tree shaking 的（请使用 ESM 模块）。
 
 ## Usage
 
@@ -63,7 +69,7 @@ segmentit.loadSynonymDict(synonyms);
 segmentit.loadStopwordDict(stopwords);
 ```
 
-因此你实际上可以 import 所需的那部分字典和模块，然后一个个如下载入。没有 import 的那些字典和模块应该会被 webpack 的 tree shaking 去掉。你也可以这样载入自己定义的字典文件，只需要主要 loadDict 的函数签名是 ```(dicts: string | string[]): Segment```。
+因此你实际上可以 import 所需的那部分字典和模块，然后一个个如下载入。没有 import 的那些字典和模块应该会被 webpack 的 tree shaking 去掉。你也可以这样载入自己定义的字典文件，只需要主要 loadDict 的函数签名是 `(dicts: string | string[]): Segment`。
 
 ```javascript
 // load custom module and dicts
