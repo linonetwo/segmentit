@@ -628,7 +628,7 @@
     "@babel/helper-plugin-utils" "^7.0.0"
     "@babel/plugin-transform-flow-strip-types" "^7.0.0"
 
-"@babel/runtime@^7.1.2":
+"@babel/runtime@^7.3.1":
   version "7.3.1"
   resolved "http://registry.npm.taobao.org/@babel/runtime/download/@babel/runtime-7.3.1.tgz#574b03e8e8a9898eaf4a872a92ea20b7846f6f2a"
   integrity sha1-V0sD6OipiY6vSocqkuogt4Rvbyo=
@@ -1016,7 +1016,7 @@ babel-preset-jest@^24.1.0:
     "@babel/plugin-syntax-object-rest-spread" "^7.0.0"
     babel-plugin-jest-hoist "^24.1.0"
 
-babel-runtime@^6.26.0, babel-runtime@~6.26.0:
+babel-runtime@^6.26.0:
   version "6.26.0"
   resolved "http://registry.npm.taobao.org/babel-runtime/download/babel-runtime-6.26.0.tgz#965c7058668e82b55d7bfe04ff2337bc8b5647fe"
   integrity sha1-llxwWGaOgrVde/4E/yM3vItWR/4=
@@ -1123,7 +1123,7 @@ browser-stdout@1.3.1:
   resolved "http://registry.npm.taobao.org/browser-stdout/download/browser-stdout-1.3.1.tgz#baa559ee14ced73452229bad7326467c61fabd60"
   integrity sha1-uqVZ7hTO1zRSIputcyZGfGH6vWA=
 
-browserslist@^4.3.4:
+browserslist@^4.3.4, browserslist@^4.4.1:
   version "4.4.1"
   resolved "http://registry.npm.taobao.org/browserslist/download/browserslist-4.4.1.tgz#42e828954b6b29a7a53e352277be429478a69062"
   integrity sha1-QugolUtrKaelPjUid75ClHimkGI=
@@ -1214,7 +1214,7 @@ camelcase@^5.0.0:
   resolved "http://registry.npm.taobao.org/camelcase/download/camelcase-5.0.0.tgz#03295527d58bd3cd4aa75363f35b2e8d97be2f42"
   integrity sha1-AylVJ9WL081Kp1Nj81sujZe+L0I=
 
-caniuse-db@^1.0.30000889:
+caniuse-db@^1.0.30000935:
   version "1.0.30000935"
   resolved "http://registry.npm.taobao.org/caniuse-db/download/caniuse-db-1.0.30000935.tgz#0b4210ae207013c76bc1a2e0e903b15bec742a08"
   integrity sha1-C0IQriBwE8drwaLg6QOxW+x0Kgg=
@@ -1801,15 +1801,15 @@ eslint-module-utils@^2.3.0:
     debug "^2.6.8"
     pkg-dir "^2.0.0"
 
-eslint-plugin-compat@^2.6.3:
-  version "2.6.3"
-  resolved "http://registry.npm.taobao.org/eslint-plugin-compat/download/eslint-plugin-compat-2.6.3.tgz#2606644110ab1150bec23a45034367ddbea1f1e9"
-  integrity sha1-JgZkQRCrEVC+wjpFA0Nn3b6h8ek=
+eslint-plugin-compat@^2.7.0:
+  version "2.7.0"
+  resolved "http://registry.npm.taobao.org/eslint-plugin-compat/download/eslint-plugin-compat-2.7.0.tgz#85043d41a84be4daa3aa6efbda90e5997fc7c3ff"
+  integrity sha1-hQQ9QahL5Nqjqm772pDlmX/Hw/8=
   dependencies:
-    "@babel/runtime" "^7.1.2"
-    browserslist "^4.3.4"
-    caniuse-db "^1.0.30000889"
-    mdn-browser-compat-data "^0.0.54"
+    "@babel/runtime" "^7.3.1"
+    browserslist "^4.4.1"
+    caniuse-db "^1.0.30000935"
+    mdn-browser-compat-data "^0.0.65"
 
 eslint-plugin-flowtype@~3.2.1:
   version "3.2.1"
@@ -3709,10 +3709,10 @@ md5@^2.1.0:
     crypt "~0.0.1"
     is-buffer "~1.1.1"
 
-mdn-browser-compat-data@^0.0.54:
-  version "0.0.54"
-  resolved "http://registry.npm.taobao.org/mdn-browser-compat-data/download/mdn-browser-compat-data-0.0.54.tgz#e5a5a9b84b2d52a8ae553294055853584fa96be0"
-  integrity sha1-5aWpuEstUqiuVTKUBVhTWE+pa+A=
+mdn-browser-compat-data@^0.0.65:
+  version "0.0.65"
+  resolved "http://registry.npm.taobao.org/mdn-browser-compat-data/download/mdn-browser-compat-data-0.0.65.tgz#e8076bac0e72f8b0062a0774043481612f238407"
+  integrity sha1-6AdrrA5y+LAGKgd0BDSBYS8jhAc=
   dependencies:
     extend "3.0.2"
 
