@@ -35,6 +35,7 @@ export default class WildcardTokenizer extends Tokenizer {
     }
     return ret;
   }
+
   /**
    * 匹配单词，返回相关信息
    *

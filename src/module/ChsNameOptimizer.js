@@ -2,7 +2,9 @@
 import { Optimizer } from './BaseModule';
 import type { SegmentToken } from './type';
 
-import { FAMILY_NAME_1, FAMILY_NAME_2, SINGLE_NAME, DOUBLE_NAME_1, DOUBLE_NAME_2 } from './CHS_NAMES';
+import {
+  FAMILY_NAME_1, FAMILY_NAME_2, SINGLE_NAME, DOUBLE_NAME_1, DOUBLE_NAME_2,
+} from './CHS_NAMES';
 
 export default class ChsNameOptimizer extends Optimizer {
   doOptimize(words: Array<SegmentToken>): Array<SegmentToken> {
@@ -17,9 +19,9 @@ export default class ChsNameOptimizer extends Optimizer {
         // debug(nextword);
         // 如果为  "小|老" + 姓
         if (
-          nextword &&
-          (word.w === '小' || word.w === '老') &&
-          (nextword.w in FAMILY_NAME_1 || nextword.w in FAMILY_NAME_2)
+          nextword
+          && (word.w === '小' || word.w === '老')
+          && (nextword.w in FAMILY_NAME_1 || nextword.w in FAMILY_NAME_2)
         ) {
           words.splice(i, 2, {
             w: word.w + nextword.w,
@@ -31,8 +33,8 @@ export default class ChsNameOptimizer extends Optimizer {
 
         // 如果是 姓 + 名（2字以内）
         if (
-          (word.w in FAMILY_NAME_1 || word.w in FAMILY_NAME_2) &&
-          ((nextword.p & POSTAG.A_NR) > 0 && nextword.w.length <= 2)
+          (word.w in FAMILY_NAME_1 || word.w in FAMILY_NAME_2)
+          && ((nextword.p & POSTAG.A_NR) > 0 && nextword.w.length <= 2)
         ) {
           words.splice(i, 2, {
             w: word.w + nextword.w,
@@ -45,8 +47,8 @@ export default class ChsNameOptimizer extends Optimizer {
         // 如果相邻两个均为单字且至少有一个字是未识别的，则尝试判断其是否为人名
         if (!word.p || !nextword.p) {
           if (
-            (word.w in SINGLE_NAME && word.w === nextword.w) ||
-            (word.w in DOUBLE_NAME_1 && nextword.w in DOUBLE_NAME_2)
+            (word.w in SINGLE_NAME && word.w === nextword.w)
+            || (word.w in DOUBLE_NAME_1 && nextword.w in DOUBLE_NAME_2)
           ) {
             words.splice(i, 2, {
               w: word.w + nextword.w,

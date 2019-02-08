@@ -34,13 +34,13 @@ export default class AdjectiveOptimizer extends Optimizer {
     }
     const { POSTAG } = this.segment;
     return (
-      pos === POSTAG.D_N ||
-      pos === POSTAG.A_NT ||
-      pos === POSTAG.A_NX ||
-      pos === POSTAG.A_NZ ||
-      pos === POSTAG.A_NR ||
-      pos === POSTAG.A_NS ||
-      pos === POSTAG.URL
+      pos === POSTAG.D_N
+      || pos === POSTAG.A_NT
+      || pos === POSTAG.A_NX
+      || pos === POSTAG.A_NZ
+      || pos === POSTAG.A_NR
+      || pos === POSTAG.A_NS
+      || pos === POSTAG.URL
     );
   }
 }

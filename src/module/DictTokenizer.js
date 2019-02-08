@@ -149,12 +149,12 @@ export default class DictTokenizer extends Tokenizer {
             }
             // 如果是地区名、机构名或形容词，后面跟地区、机构、代词、名词等，则加分
             if (
-              ((prew.p & POSTAG.A_NS) > 0 || prew.p & POSTAG.A_NT || (prew.p & POSTAG.D_A) > 0) &&
-              ((w.p & POSTAG.D_N) > 0 ||
-                (w.p & POSTAG.A_NR) > 0 ||
-                (w.p & POSTAG.A_NS) > 0 ||
-                (w.p & POSTAG.A_NZ) > 0 ||
-                (w.p & POSTAG.A_NT) > 0)
+              ((prew.p & POSTAG.A_NS) > 0 || prew.p & POSTAG.A_NT || (prew.p & POSTAG.D_A) > 0)
+              && ((w.p & POSTAG.D_N) > 0
+                || (w.p & POSTAG.A_NR) > 0
+                || (w.p & POSTAG.A_NS) > 0
+                || (w.p & POSTAG.A_NZ) > 0
+                || (w.p & POSTAG.A_NT) > 0)
             ) {
               assess[i].d++;
             }
@@ -165,8 +165,8 @@ export default class DictTokenizer extends Tokenizer {
             }
             // 如果是 姓 + 名词，则加分
             if (
-              (prew.w in FAMILY_NAME_1 || prew.w in FAMILY_NAME_2) &&
-              ((w.p & POSTAG.D_N) > 0 || (w.p & POSTAG.A_NZ) > 0)
+              (prew.w in FAMILY_NAME_1 || prew.w in FAMILY_NAME_2)
+              && ((w.p & POSTAG.D_N) > 0 || (w.p & POSTAG.A_NZ) > 0)
             ) {
               // debug(prew, w);
               assess[i].d++;
@@ -184,12 +184,12 @@ export default class DictTokenizer extends Tokenizer {
               }
               // 如果当前是“的”+ 名词，则加分
               if (
-                (w.w === '的' || w.w === '之') &&
-                ((nextw.p & POSTAG.D_N) > 0 ||
-                  (nextw.p & POSTAG.A_NR) > 0 ||
-                  (nextw.p & POSTAG.A_NS) > 0 ||
-                  (nextw.p & POSTAG.A_NZ) > 0 ||
-                  (nextw.p & POSTAG.A_NT) > 0)
+                (w.w === '的' || w.w === '之')
+                && ((nextw.p & POSTAG.D_N) > 0
+                  || (nextw.p & POSTAG.A_NR) > 0
+                  || (nextw.p & POSTAG.A_NS) > 0
+                  || (nextw.p & POSTAG.A_NZ) > 0
+                  || (nextw.p & POSTAG.A_NT) > 0)
               ) {
                 assess[i].d += 1.5;
               }
@@ -250,6 +250,7 @@ export default class DictTokenizer extends Tokenizer {
 
     return wordpos;
   }
+
   /**
     * 取所有分支
     *
@@ -276,6 +277,7 @@ export default class DictTokenizer extends Tokenizer {
     }
     return ret;
   }
+
   /**
     * 评价排名
     *

@@ -37,7 +37,7 @@ export default class Segment {
       Module.forEach(this.use);
     } else {
       // 初始化并注册模块
-      if (typeof Module.init === "function") {
+      if (typeof Module.init === 'function') {
         Module.init(this);
         this.modules[Module.type].push(Module);
       } else {

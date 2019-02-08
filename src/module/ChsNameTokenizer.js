@@ -2,7 +2,9 @@
 import { Tokenizer } from './BaseModule';
 import type { SegmentToken, TokenStartPosition } from './type';
 
-import { FAMILY_NAME_1, FAMILY_NAME_2, SINGLE_NAME, DOUBLE_NAME_1, DOUBLE_NAME_2 } from './CHS_NAMES';
+import {
+  FAMILY_NAME_1, FAMILY_NAME_2, SINGLE_NAME, DOUBLE_NAME_1, DOUBLE_NAME_2,
+} from './CHS_NAMES';
 
 export default class ChsNameTokenizer extends Tokenizer {
   split(words: Array<SegmentToken>): Array<SegmentToken> {
@@ -35,6 +37,7 @@ export default class ChsNameTokenizer extends Tokenizer {
     }
     return ret;
   }
+
   // 匹配包含的人名，并返回相关信息
   static matchName(text: string, startPos: number): Array<TokenStartPosition> {
     let startPosition = 0;
@@ -57,8 +60,8 @@ export default class ChsNameTokenizer extends Tokenizer {
       // 单姓
       const f1 = text.charAt(startPosition);
       if (name === false && f1 in FAMILY_NAME_1) {
-        var n1 = text.charAt(startPosition + 1);
-        var n2 = text.charAt(startPosition + 2);
+        const n1 = text.charAt(startPosition + 1);
+        const n2 = text.charAt(startPosition + 2);
         if (n1 in DOUBLE_NAME_1 && n2 in DOUBLE_NAME_2) {
           name = f1 + n1 + n2;
         } else if (n1 in SINGLE_NAME) {

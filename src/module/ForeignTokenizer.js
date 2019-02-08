@@ -16,6 +16,7 @@ export default class ForeignTokenizer extends Tokenizer {
     }
     return ret;
   }
+
   /**
    * 匹配包含的英文字符和数字，并分割
    *

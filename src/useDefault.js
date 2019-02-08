@@ -1,5 +1,7 @@
 // @flow
-import Segment, { modules, dicts, synonyms, stopwords } from './';
+import Segment, {
+  modules, dicts, synonyms, stopwords,
+} from '.';
 
 export default function useDefault(segmentInstance: Segment): Segment {
   segmentInstance.use(modules);

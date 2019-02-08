@@ -5,7 +5,9 @@ import useDefault from './useDefault';
 export default Segment;
 export { useDefault };
 
-export { POSTAG, getPOSTagTranslator, cnPOSTag, enPOSTag } from './POSTAG';
+export {
+  POSTAG, getPOSTagTranslator, cnPOSTag, enPOSTag,
+} from './POSTAG';
 export {
   modules,
   Module,

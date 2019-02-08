@@ -1,8 +1,9 @@
 // @flow
-import Segment from '../';
+import Segment from '..';
 
 export class Module {
   type: 'optimizer' | 'tokenizer';
+
   constructor(segment: Segment) {
     this.segment = segment;
   }
