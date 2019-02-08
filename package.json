@@ -27,7 +27,7 @@
     ]
   },
   "scripts": {
-    "clean": "rm -rf coverage dist tmp",
+    "clean": "rimraf dist & rimraf build & rimraf coverage",
     "flow-typed": "rimraf flow-typed/npm && flow-typed install --overwrite || true",
     "lint": "eslint .",
     "lintfix": "eslint . --fix",
@@ -62,7 +62,7 @@
   "browserslist": "> 0.25%, not dead",
   "dependencies": {
     "babel-runtime": "~6.26.0",
-    "flow-typed": "^2.5.1"
+    "preval.macro": "^3.0.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
@@ -73,7 +73,7 @@
     "@babel/preset-flow": "^7.0.0",
     "babel-eslint": "^10.0.1",
     "babel-jest": "~24.1.0",
-    "babel-plugin-static-fs": "^1.2.0",
+    "babel-plugin-macros": "^2.4.5",
     "eslint": "^5.13.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-compat": "^2.6.3",
@@ -83,8 +83,10 @@
     "eslint-plugin-promise": "^4.0.1",
     "eslint-plugin-react": "^7.12.4",
     "flow-bin": "~0.92.1",
+    "flow-typed": "^2.5.1",
     "jest": "~24.1.0",
     "mocha": "5.2.0",
     "should": "13.2.3"
+    "rimraf": "^2.6.3",
   }
 }
