@@ -7,6 +7,10 @@
 <img src='https://coveralls.io/repos/github/linonetwo/segmentit/badge.svg?branch=master' alt='Coverage Status' height='18'/>
 </a>
 
+<a href='https://travis-ci.org/linonetwo/segmentit#' style='margin: 0 0.5rem;'>
+<img src='https://api.travis-ci.org/linonetwo/segmentit.svg?branch=master' alt='CI Status' height='18'/>
+</a>
+
 <a href='https://img.shields.io/bundlephobia/minzip/segmentit.svg' style='margin: 0 0.5rem;'>
 <img src='https://img.shields.io/bundlephobia/minzip/segmentit.svg' alt='Min Zip Size' height='18'/>
 </a>
