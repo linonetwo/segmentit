@@ -57,9 +57,6 @@
     "type": "git",
     "url": "git://github.com/linonetwo/segmentit.git"
   },
-  "engines": {
-    "node": ">=6.9"
-  },
   "browserslist": "> 0.25%, not dead",
   "jest": {
     "testEnvironment": "node",
