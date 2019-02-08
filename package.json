@@ -3,7 +3,10 @@
   "main": "dist/cjs",
   "module": "dist/esm/segmentit.js",
   "browser": "dist/umd/segmentit.js",
-  "version": "1.1.5",
+  "files": [
+    "dist"
+  ],
+  "version": "2.0.0",
   "description": "Chinese word segmentation 中文分词模块 with browser && electron support",
   "keywords": [
     "segment",
@@ -17,16 +20,9 @@
     "nodejs",
     "分词"
   ],
-  "jest": {
-    "testEnvironment": "node",
-    "moduleFileExtensions": [
-      "js"
-    ],
-    "watchman": false,
-    "coverageDirectory": "coverage",
-    "collectCoverageFrom": [
-      "src/**/*.js"
-    ]
+  "homepage": "https://github.com/linonetwo/segmentit#readme",
+  "bugs": {
+    "url": "https://github.com/linonetwo/segmentit/issues"
   },
   "scripts": {
     "clean": "rimraf dist & rimraf build & rimraf coverage",
@@ -43,7 +39,10 @@
     "build": "NODE_ENV=production && npm run clean && rollup -c",
     "build:watch": "babel --watch src -d dist"
   },
-  "author": "Lei Zongmin <leizongmin@gmail.com>",
+  "authors": [
+    "Lei Zongmin <leizongmin@gmail.com>",
+    "Linonetwo <linonetwo012@gmail.com> (https://onetwo.ren/)"
+  ],
   "contributors": [
     {
       "name": "Lei Zongmin",
@@ -62,8 +61,18 @@
     "node": ">=6.9"
   },
   "browserslist": "> 0.25%, not dead",
+  "jest": {
+    "testEnvironment": "node",
+    "moduleFileExtensions": [
+      "js"
+    ],
+    "watchman": false,
+    "coverageDirectory": "coverage",
+    "collectCoverageFrom": [
+      "src/**/*.js"
+    ]
+  },
   "dependencies": {
-    "babel-runtime": "~6.26.0",
     "preval.macro": "^3.0.0"
   },
   "devDependencies": {
@@ -78,7 +87,7 @@
     "babel-plugin-macros": "^2.4.5",
     "eslint": "^5.13.0",
     "eslint-config-airbnb": "^17.1.0",
-    "eslint-plugin-compat": "^2.6.3",
+    "eslint-plugin-compat": "^2.7.0",
     "eslint-plugin-flowtype": "~3.2.1",
     "eslint-plugin-import": "^2.16.0",
     "eslint-plugin-jsx-a11y": "^6.2.1",
