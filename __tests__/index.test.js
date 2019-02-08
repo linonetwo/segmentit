@@ -1,7 +1,7 @@
 /** @flow */
 
 import assert from 'assert';
-import Segmentit, { useDefault } from '../src';
+import { Segment, useDefault } from '../src';
 
 describe('分词测试', () => {
   let segmentit = null;
@@ -13,7 +13,7 @@ describe('分词测试', () => {
   };
 
   it('init', () => {
-    segmentit = useDefault(new Segmentit());
+    segmentit = useDefault(new Segment());
   });
 
   it('常用测试题目', () => {

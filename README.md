@@ -7,9 +7,9 @@
 ## Usage
 
 ```javascript
-import Segmentit, { useDefault } from 'segmentit';
+import { Segment, useDefault } from 'segmentit';
 
-const segmentit = useDefault(new Segmentit());
+const segmentit = useDefault(new Segment());
 const result = segmentit.doSegment('工信处女干事每月经过下属科室都要亲口交代24口交换机等技术性器件的安装工作。');
 console.log(result);
 ```
@@ -17,9 +17,8 @@ console.log(result);
 对于 runkit 环境：
 
 ```javascript
-const Segmentit = require('segmentit').default;
-const useDefault = require('segmentit').useDefault;
-const segmentit = useDefault(new Segmentit());
+const { Segment, useDefault } = require('segmentit');
+const segmentit = useDefault(new Segment());
 const result = segmentit.doSegment('工信处女干事每月经过下属科室都要亲口交代24口交换机等技术性器件的安装工作。');
 console.log(result);
 ```
@@ -32,10 +31,10 @@ console.log(result);
 
 ```javascript
 // import Segment, { useDefault, cnPOSTag, enPOSTag } from 'segmentit';
-const Segmentit = require('segmentit').default;
-const { useDefault, cnPOSTag, enPOSTag } = require('segmentit');
+const  = require('segmentit').default;
+const { Segment, useDefault, cnPOSTag, enPOSTag } = require('segmentit');
 
-const segmentit = useDefault(new Segmentit());
+const segmentit = useDefault(new Segment());
 
 console.log(segmentit.doSegment('一人得道，鸡犬升天').map(i => `${i.w} <${cnPOSTag(i.p)}> <${enPOSTag(i.p)}>`))
 // ↑ ["一人得道 <习语,数词 数语素> <l,m>", "， <标点符号> <w>", "鸡犬升天 <成语> <i>"]
@@ -47,9 +46,9 @@ useDefault 的具体实现是这样的：
 
 ```javascript
 // useDefault
-import Segment, { modules, dicts, synonyms, stopwords } from 'segmentit';
+import { Segment, modules, dicts, synonyms, stopwords } from 'segmentit';
 
-const segmentit = new Segmentit();
+const segmentit = new Segment();
 segmentit.use(modules);
 segmentit.loadDict(dicts);
 segmentit.loadSynonymDict(synonyms);
@@ -60,7 +59,8 @@ segmentit.loadStopwordDict(stopwords);
 
 ```javascript
 // load custom module and dicts
-import Segment, {
+import {
+  Segment,
   ChsNameTokenizer,
   DictOptimizer,
   EmailOptimizer,
@@ -81,7 +81,7 @@ import Segment, {
   stopword,
 } from 'segmentit';
 
-const segmentit = new Segmentit();
+const segmentit = new Segment();
 
 // load them one by one, or by array
 segmentit.use(ChsNameTokenizer);

@@ -18,7 +18,7 @@ export default class Tokenizer {
    * @param {array} modules 分词模块数组
    * @return {array}
    */
-  static split(text, modules): SegmentToken[] {
+  split(text, modules): SegmentToken[] {
     if (modules.length < 1) {
       throw Error('No tokenizer module!');
     }

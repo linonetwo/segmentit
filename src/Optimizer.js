@@ -18,7 +18,7 @@ export default class Optimizer {
    * @param {array} modules 分词模块数组
    * @return {array}
    */
-  static doOptimize(words, modules): SegmentToken[] {
+  doOptimize(words, modules): SegmentToken[] {
     let result = [...words];
     // 按顺序分别调用各个module来进行分词，各个module仅对没有识别类型的单词进行分词
     modules.forEach(module => {

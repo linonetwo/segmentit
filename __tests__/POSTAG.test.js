@@ -1,14 +1,14 @@
 /** @flow */
 
 import assert from 'assert';
-import Segmentit, { useDefault, cnPOSTag, enPOSTag } from '../src';
+import { Segment, useDefault, cnPOSTag, enPOSTag } from '../src';
 
 let segmentit = null;
 let toPOS = null;
 let equal = null;
 describe('给出词类的中文解释', () => {
   it('init', () => {
-    segmentit = useDefault(new Segmentit());
+    segmentit = useDefault(new Segment());
     toPOS = arr => arr.map(w => cnPOSTag(w.p));
     equal = (a, b) => {
       const aString = toPOS(segmentit.doSegment(a));
@@ -27,7 +27,7 @@ describe('给出词类的中文解释', () => {
 
 describe('给出词类的中文解释', () => {
   it('init', () => {
-    segmentit = useDefault(new Segmentit());
+    segmentit = useDefault(new Segment());
     toPOS = arr => arr.map(w => enPOSTag(w.p));
     equal = (a, b) => {
       const aString = toPOS(segmentit.doSegment(a));

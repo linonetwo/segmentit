@@ -81,4 +81,4 @@ export {
   stopwords,
 };
 
-export default Segment;
+export { Segment };
