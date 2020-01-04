@@ -49,7 +49,6 @@ console.log(result);
 
 ```javascript
 // import Segment, { useDefault, cnPOSTag, enPOSTag } from 'segmentit';
-const  = require('segmentit').default;
 const { Segment, useDefault, cnPOSTag, enPOSTag } = require('segmentit');
 
 const segmentit = useDefault(new Segment());
