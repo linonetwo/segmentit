@@ -43,6 +43,18 @@ console.log(result);
 
 [在 Runkit 上免费试用](https://npm.runkit.com/segmentit)
 
+浏览器直接使用例：
+
+首先请引用 “https://cdn.jsdelivr.net/npm/segmentit@2.0.3/dist/umd/segmentit.js”
+
+```javascript
+const segmentit = Segmentit.useDefault(new Segmentit.Segment());
+const result = segmentit.doSegment('工信处女干事每月经过下属科室都要亲口交代24口交换机等技术性器件的安装工作。');
+console.log(result);
+```
+
+（其实就是把所有调用，初始化什么的全都加上 `Segmentit.` 就可以了）
+
 ## 获取词类标注
 
 结巴分词风格的词类标注：
