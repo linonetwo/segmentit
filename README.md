@@ -23,6 +23,18 @@
 之所以要花时间魔改，是因为 `segment` 和 `nodejieba` 虽然在 node 环境下很好用，但根本无法在浏览器和 electron 环境下运行。我把代码重构为 ES2015，并用 babel 插件内联了字典文件，全部载入的话大小是 3.8M，但如果有些字典你并不需要，字典和模块是支持 tree shaking 的（请使用 ESM 模块）。
 
 ## Usage
+  
+### Install
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/segmentit@2.0.3/dist/umd/segmentit.min.js" />
+```
+  
+```sh
+npm i segmentit
+```
+
+### Use
 
 ```javascript
 import { Segment, useDefault } from 'segmentit';
